@@ -1,0 +1,80 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.content-block {
+    color: gray;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.title-block img {
+    float: right;
+    transition: 0.4s;
+    margin-top: 40px;
+    margin-right: -100px;
+}
+
+h2.title-block {
+    height: 90px;
+    font-size: 70px;
+    font-weight: 300;
+    color: #464646;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+h2.title-block:hover img {
+    margin-right: 0px;
+}
+
+h2.title-block:hover {
+    color: lightblue;
+}
+
+.block {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.44);
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+}
+
+.gallery-image {
+    overflow: hidden;
+}
+
+img.thumbnail-image {
+    float: left;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.content {
+    width: 35%;
+    margin: auto;
+    font-family: 'josefin slab', serif;
+}
+
+body {
+    background: url(images/nen.png);
+}
+
+h1.title {
+    font-family: 'josefin slab', serif;
+    font-weight: 100;
+    text-align: center;
+    margin: 17px 0;
+    font-size: 37px;
+    margin-bottom: 50px;
+}
+
+.title-block.blue {
+	color: lightblue;
+}
+
+h2.title-block.blue img {
+    margin-right: 0;
+    transform: rotate(180deg);
+    margin-top: 40px;
+}
