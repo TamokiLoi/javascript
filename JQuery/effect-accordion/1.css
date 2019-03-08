@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.content-block {
+    padding: 10px;
+    border: 1px solid #C2C2C2;
+    background: rgba(252, 252, 252, 0.56);
+    color: #3C3C3C;
+}
+
+.block h3 {
+    background: #00BCD4;
+    color: white;
+    padding: 10px 15px;
+}
+
+.block h3:hover {
+    background: url(images/arrow_down.png) no-repeat 96% #00BCD4;
+}
+
+.block h3.bg-hover-h3:hover {
+    background: url(images/arrow_up.png) no-repeat 96% lightblue;
+}
+
+.effect {
+    width: 20%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.container {
+    text-align: center;
+    font-family: segoe ui light;
+}
+
+body {
+    background: url(images/bgnoise_lg.jpg);
+}
