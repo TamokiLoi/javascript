@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.about.fixed-about {
+    position: fixed;
+    top: 50px;
+}
+
+.menu {
+    height: 50px;
+    line-height: 50px;
+    background: #9e1c20;
+    transition: 0.4s;
+}
+
+.menu a {
+    color: white;
+    padding: 0 34px;
+    text-transform: uppercase;
+}
+
+.banner {
+    height: 100px;
+    background: url(header-kenh14.PNG) no-repeat center;
+    background-size: cover;
+}
+
+.menu.change-menu {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    top: 0;
+    background: #1d1d1d;
+}
