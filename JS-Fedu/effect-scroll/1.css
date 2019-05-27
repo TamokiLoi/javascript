@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.right a {
+    color: #2d4f80;
+    font-weight: normal;
+    font-size: 18px;
+    padding: 0 40px;
+    text-transform: uppercase;
+    transition: 0.4s;
+    text-decoration: none !important;
+}
+
+.right a:active,
+.right a:visited {
+    text-decoration: none !important;
+}
+
+.menu {
+    background: #cccccc;
+    padding: 40px 0;
+    font-size: 30px;
+    font-weight: bold;
+    transition: 0.4s;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+.toSmall {
+    font-size: 20px;
+    padding: 10px 0;
+}
