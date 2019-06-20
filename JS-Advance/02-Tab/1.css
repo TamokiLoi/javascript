@@ -52,9 +52,10 @@
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 4px;
-    transition: 0.4s;
+    transition: 0.9s;
     opacity: 0;
     visibility: hidden;
+    transform: scale(0);
 }
 
 .four-content {
@@ -87,4 +88,5 @@ li.active b.btn {
 .four-content li.show {
     opacity: 1;
     visibility: visible;
+    transform: scale(1);
 }
