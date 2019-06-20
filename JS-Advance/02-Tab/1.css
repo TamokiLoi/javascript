@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.four-button li b {
+    width: 130px;
+}
+
+.four-content li:after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: -9px;
+    transform: rotateZ(45deg);
+}
+
+.four-content li:before {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    border: 0px solid #ddd;
+    position: absolute;
+    top: -7px;
+    transform: rotateZ(45deg);
+    background: white;
+    z-index: 4;
+}
+
+.content-detail {
+    color: gray;
+    font-family: segoe ui light;
+    line-height: 20px;
+    font-size: 15px;
+}
+
+.content-detail img {
+    border: 1px solid gray;
+    padding: 2px;
+    margin-right: 20px;
+    width: 30%;
+}
+
+.four-content li {
+    list-style: none;
+    position: absolute;
+    width: 900px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    transition: 0.4s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.four-content {
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.four-button li {
+    list-style: none;
+    float: left;
+    margin: 10px;
+}
+
+.four-button {
+    width: 900px;
+    margin: auto;
+    height: 75px;
+    background: white;
+    padding: 10px;
+}
+
+li.active b.btn {
+    background: #f0ad4e;
+    color: #414141;
+}
+
+.four-content li.show {
+    opacity: 1;
+    visibility: visible;
+}
