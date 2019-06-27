@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+
+    <% var b = 20; %>
+    <h2>Param b value is: <%= b %></h2>
+    <%= b*2 %>
+
+    <%  
+      var mang = ["PHP", "THIET KE WEB", "LAM VIDEO QUANG CAO"];
+      mang.forEach(function(khoahoc){    
+    %>
+    <li>
+      <%= khoahoc %>
+    </li>
+    <%
+
+    })
+
+    %>
+
+    <%
+      var y = "<h2 style='color:red'> Hello </h2>";
+    %>
+
+    <%-y %>
+
+  </body>
+</html>
