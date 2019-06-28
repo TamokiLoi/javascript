@@ -1,0 +1,48 @@
+{
+    "products" : [
+        {
+            "id": 1,
+            "title": "Website fedu.vn",
+            "bigImage": "./images/p1.jpg",
+            "productImage": ["./images/p1.jpg", "./images/p2.jpg"],
+            "description": "description product 01",
+            "client": "VCoporation",
+            "role": "Coder",
+            "category": "Web Design",
+            "link": "http://fedu.vn"
+        },
+        {
+            "id": 2,
+            "title": "Thiết kế logo",
+            "bigImage": "./images/p3.jpg",
+            "productImage": ["./images/p3.jpg", "./images/p4.jpg"],
+            "description": "description product 02",
+            "client": "Seldat",
+            "role": "Designer",
+            "category": "Branding",
+            "link": "http://zing.vn"
+        },
+        {
+            "id": 3,
+            "title": "Thiết kế Banner",
+            "bigImage": "./images/p5.jpg",
+            "productImage": ["./images/p5.jpg", "./images/p6.jpg"],
+            "description": "description product 03",
+            "client": "Fedu",
+            "role": "Artist",
+            "category": "Backend",
+            "link": "http://vnexpress.vn"
+        },
+        {
+            "id": 4,
+            "title": "Thiết kế chức năng cho Frontend",
+            "bigImage": "./images/p7.jpg",
+            "productImage": ["./images/p7.jpg", "./images/p8.jpg"],
+            "description": "description product 04",
+            "client": "FPT",
+            "role": "Frontend Dev",
+            "category": "Frontend",
+            "link": "http://thegioididong.com"
+        }
+    ]
+}
