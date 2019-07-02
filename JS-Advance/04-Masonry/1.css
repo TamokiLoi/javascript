@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content .block-image {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.block-image img {
+    width: 100%;
+}
+
+figcaption {
+    text-align: center;
+    padding: 2px;
+    background: lightblue;
+}
+
+.active {
+    background: brown !important;
+    color: white !important;
+}
+
+/* iphone */
+@media (max-width: 576px) {
+    .content .block-image { width: 100%;}
+}
+
+/* ipad */
+@media (min-width: 577px) and (max-width: 768px) {
+    .content .block-image { width: 50%;}
+}
