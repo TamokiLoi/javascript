@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+    </div>
+
+    <script>
+        // computed thực hiện như 1 function nhưng chỉ được xem như 1 property(thuộc tính)
+        // computed và watcher thường đi kèm với nhau
+        // watcher theo dõi sự thay đổi của biến để làm một hành động nào đó
+        new Vue({
+            el: '#app',
+            data: {
+               point: 'Bạn A có 7 điểm môn toán'
+            },
+            watch: {
+                message: function(newValue) {
+                    console.log('Điểm của bạn ấy được thay đổi sang điểm khác');
+                }
+            },
+            computed: {
+                
+            },
+            methods: {
+                
+            }
+        });
+    </script>
+
+</body>
+
+</html>

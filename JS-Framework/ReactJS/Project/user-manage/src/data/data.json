@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Pacific rim",
+        "phone": "093390093",
+        "permission": 1
+    },
+    {
+        "id": 2,
+        "name": "Iron Man",
+        "phone": "092290092",
+        "permission": 2
+    },
+    {
+        "id": 3,
+        "name": "Shisedo",
+        "phone": "093391231",
+        "permission": 2
+    },
+    {
+        "id": 4,
+        "name": "Coat",
+        "phone": "093390000",
+        "permission": 3
+    },
+    {
+        "id": 5,
+        "name": "Gold",
+        "phone": "093390999",
+        "permission": 3
+    }
+]

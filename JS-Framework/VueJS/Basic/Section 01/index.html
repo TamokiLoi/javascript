@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="obj">
+       <h1>Click increase value</h1>
+       <button v-on:click="plus">Click</button>
+       <p>Value: {{ count }}</p>
+       <span v-on:mouseover.stop="">Stop Event Mouse</span>
+       <!-- <span v-on:mouseover="stopMouse">Stop Event Mouse</span> -->
+       <p v-on:mousemove="position">Position of mouse: {{ x }} / {{ y }}</p>
+
+        <div class="">
+            <input type="text" @keyup.enter.space="eventKeyboard">
+        </div>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: '#obj',
+            data: {
+                count: 0,
+                x: 0,
+                y: 0
+            },
+            methods: {
+                plus: function() {
+                    this.count++;
+                },
+                position: function(event) {
+                    console.log(event)
+                    // this.x = event.clientX;
+                    // this.y = event.clientY;
+                },
+                stopMouse: function() {
+                    event.stopPropagation();
+                },
+                eventKeyboard: function() {
+                    alert("hello");
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

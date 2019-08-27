@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>Value A: {{ plusA }}</p>
+        <p>Value B: {{ plusB }}</p>
+        <p>Value C: {{ plusC() }}</p>
+        <p>Value D: {{ plusD() }}</p>
+        <button @click="a++">Plus A</button>
+        <button @click="b++">Plus B</button>
+        <button @click="c++">Plus C</button>
+        <button @click="d++">Plus D</button>
+        <button @click="reload()">Reload</button>
+    </div>
+
+    <script>
+        // computed thực hiện như 1 function nhưng chỉ được xem như 1 property(thuộc tính)
+        new Vue({
+            el: '#app',
+            data: {
+                a: 0,
+                b: 0,
+                c: 0,
+                d: 0,
+            },
+            computed: {
+                plusA: function() {
+                    console.log("computed");
+                    console.log("Call function A");
+                    return this.a;
+                },
+                plusB: function() {
+                    console.log("computed");
+                    console.log("Call function B");
+                    return this.b;
+                }
+            },
+            methods: {
+                reload: function() {
+                    location.reload();
+                },
+                plusC: function() {
+                    console.log("methods");
+                    console.log("Call function C");
+                    return this.c;
+                },
+                plusD: function() {
+                    console.log("methods");
+                    console.log("Call function D");
+                    return this.d;
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
