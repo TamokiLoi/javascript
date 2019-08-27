@@ -8,8 +8,9 @@
             "description": "description product 01",
             "client": "VCoporation",
             "role": "Coder",
-            "category": "Web Design",
-            "link": "http://fedu.vn"
+            "category": "Web",
+            "link": "http://fedu.vn",
+            "slug": "website-fedu"
         },
         {
             "id": 2,
@@ -20,7 +21,8 @@
             "client": "Seldat",
             "role": "Designer",
             "category": "Branding",
-            "link": "http://zing.vn"
+            "link": "http://zing.vn",
+            "slug": "thiet-ke-logo"
         },
         {
             "id": 3,
@@ -31,7 +33,8 @@
             "client": "Fedu",
             "role": "Artist",
             "category": "Backend",
-            "link": "http://vnexpress.vn"
+            "link": "http://vnexpress.vn",
+            "slug": "thiet-ke-banner"
         },
         {
             "id": 4,
@@ -42,7 +45,8 @@
             "client": "FPT",
             "role": "Frontend Dev",
             "category": "Frontend",
-            "link": "http://thegioididong.com"
+            "link": "http://thegioididong.com",
+            "slug": "thiet-ke-chuc-nang-cho-frontend"
         }
     ]
 }

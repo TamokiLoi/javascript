@@ -1,17 +1,20 @@
 <% include template/header %>
+
+        <% fakedata.products.forEach(function(productDetail) { %>
+
+        <% if(productDetail.id == id) { %>
         <!-- lead -->
         <div class="ish-row ish-fullrow ish-lead">
-            <span class="ish-lead__caption ish-icon-up">Featured Image</span>
+            <span class="ish-lead__caption ish-icon-up"><%= productDetail.title %></span>
             <div class="ish-lead__image">
-                <img src="./images/header2.jpg" alt="wawererly design">
+                <img src="<%= productDetail.bigImage %>" alt="wawererly design">
             </div>
             <h1 class="ish-lead__headline">
-				<span class="ish-lead__headline-inner">Wawererly<br>Design</span>
+				<span class="ish-lead__headline-inner"><%= productDetail.title %></span>
             </h1>
         </div>
+
         <!-- lead end -->
-
-
 
         <!-- content -->
         <div class="ish-row ish-content">
@@ -20,9 +23,7 @@
 
                 <!-- side content -->
                 <p>
-                    An illustration is a visualization or a depiction made by an artist, such as a drawing,
-                    sketch, painting, photograph, or other kind of image of things seen, remembered or imagined,
-                    using a graphical representation.
+                    <%= productDetail.description %>
                 </p>
                 <p>
                     The word comes from the latin word illustra’tio, illu’stro meaning enlighten, irradiate.
@@ -86,15 +87,15 @@
             <div class="ish-col-xs-12 ish-col-sm-7 ish-col-sm-offset-1 ish-content__main">
 
                 <!-- main content -->
-                <a class="ish-image ish-lightbox" href="./images/pflo1.jpg">
-                    <img class="ish-image__image" src="./images/pflo1.jpg" alt="logotype design">
+                <a class="ish-image ish-lightbox" href="/images/pflo1.jpg">
+                    <img class="ish-image__image" src="/images/pflo1.jpg" alt="logotype design">
                     <span class="ish-image__caption">Logotype Design</span>
                 </a>
-                <a class="ish-image ish-lightbox" href="./images/pflo2.jpg">
-                    <img class="ish-image__image" src="./images/pflo2.jpg" alt="our company">
+                <a class="ish-image ish-lightbox" href="/images/pflo2.jpg">
+                    <img class="ish-image__image" src="/images/pflo2.jpg" alt="our company">
                 </a>
-                <a class="ish-image ish-lightbox" href="./images/pflo3.jpg">
-                    <img class="ish-image__image" src="./images/pflo3.jpg" alt="brochure design">
+                <a class="ish-image ish-lightbox" href="/images/pflo3.jpg">
+                    <img class="ish-image__image" src="/images/pflo3.jpg" alt="brochure design">
                     <span class="ish-image__caption">Brochure Design</span>
                 </a>
                 <!-- main content end -->
@@ -103,4 +104,5 @@
 
         </div>
         <!-- content end -->
+        <% }}) %>
 <% include template/footer %>

@@ -12,8 +12,8 @@ router.get('/detail', function(req, res, next) {
 });
 
 /* GET detail page. */
-router.get('/detail', function(req, res, next) {
-  res.render('detail');
+router.get('/*.:id', function(req, res, next) {
+  res.render('detail', {id: req.params.id});
 });
 
 module.exports = router;

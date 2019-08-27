@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+	width: 100%;
+	height: 100%;
+}
+
+.top {
+	background: url('images/bg_top.jpg');
+	background-size: cover;
+	height: 100%;
+	color: white;
+	display: table;
+}
+
+.top .content {
+	vertical-align: middle;
+	display: table-cell;
+}

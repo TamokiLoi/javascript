@@ -14,30 +14,30 @@
 		<!-- content -->
 		<div class="ish-row ish-content ish-portfolio ish-macy">
 
-      <!-- main content -->
+      		<!-- main content -->
 			<ul class="ish-portfolio-item ish-portfolio-filter">
 				<li class="ish-portfolio-filter__item ish-portfolio-filter--title"><h5>Filter:</h5></li>
 				<li class="ish-portfolio-filter__item"><a class="ish-portfolio-filter__link ish-portfolio-filter__link--active" href="#all">All</a></li>
 
-        <% fakedata.products.forEach(function(product) { %>
-        <li class="ish-portfolio-filter__item"><a class="ish-portfolio-filter__link" href="#<%= product.category %>"><%= product.category %></a></li>
-        <% }) %>
+			<% fakedata.products.forEach(function(product) { %>
+			<li class="ish-portfolio-filter__item"><a class="ish-portfolio-filter__link" href="#<%= product.category %>"><%= product.category %></a></li>
+			<% }) %>
 
 			</ul>
 
-      <% fakedata.products.forEach(function(product) { %>
-			<a class="ish-portfolio-item ish--tc13 ish-portfolio-print" href="/detail">
+			<% fakedata.products.forEach(function(product) { %>
+			<a class="ish-portfolio-item ish--tc13 ish-portfolio-<%= product.category %>" href="/<%= product.slug %>.<%= product.id %>">
 				<div class="ish-portfolio-item__image-container">
 					<img class="ish-portfolio-item__image" src="<%= product.bigImage %>" alt="business cards">
 				</div>
 				<div class="ish-portfolio-item__desc">
-          <span class="ish-portfolio-item__title"><%= product.title %></span>
+					<span class="ish-portfolio-item__title"><%= product.title %></span>
 					<span class="ish-portfolio-item__subtitle"><%= product.category %></span>
 				</div>
-      </a>
-      <% }) %>
+			</a>
+			<% }) %>
 
-      <!-- main content end -->
+      	<!-- main content end -->
 		</div>
 		<!-- content end -->
 <% include template/footer %>
