@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .bg-red {
+            background-color: red;
+        }
+
+        .bg-blue {
+            background-color: blue;
+        }
+
+        .bg-green {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="square" @click="changeColorRed"
+            :class="checkChangeColorGreen ? {'bg-red': handleRed} : {'bg-green': handleGreen}"></div>
+        <div class="square" @click="changeColorRed"
+            :class="checkChangeColorGreen ? {'bg-red': handleRed} : {'bg-green': handleGreen}"></div>
+        <div class="square" @click="handleGreen = !handleGreen"
+            :class="checkChangeColorGreen ? {'bg-red': handleRed} : {'bg-green': handleGreen}"></div>
+        <div class="square" @click="changeColorRed"
+            :class="checkChangeColorGreen ? {'bg-red': handleRed} : {'bg-green': handleGreen}"></div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                handleRed: false,
+                handleGreen: false,
+            },
+            watch: {
+
+            },
+            computed: {
+                checkChangeColorGreen: function () {
+                    if (this.handleGreen === false) {
+                        return true;
+                    }
+                    return false;
+                },
+            },
+            methods: {
+                changeColorRed: function () {
+                    this.handleRed = !this.handleRed;
+                    this.handleGreen = false;
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
