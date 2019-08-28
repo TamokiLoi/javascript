@@ -11,21 +11,22 @@
 
 <body>
     <div id="app">
-        <p>{{ message }}</p>
+        <p>{{ point }}</p>
     </div>
 
     <script>
         // computed thực hiện như 1 function nhưng chỉ được xem như 1 property(thuộc tính)
         // computed và watcher thường đi kèm với nhau
         // watcher theo dõi sự thay đổi của biến để làm một hành động nào đó
-        new Vue({
+        var app = new Vue({
             el: '#app',
             data: {
                point: 'Bạn A có 7 điểm môn toán'
             },
             watch: {
-                message: function(newValue) {
-                    console.log('Điểm của bạn ấy được thay đổi sang điểm khác');
+                point: function(newValue) {
+                    console.log(newValue);
+                    console.log('Điểm của bạn A đã được giáo viên khác nhập');
                 }
             },
             computed: {
@@ -35,6 +36,9 @@
                 
             }
         });
+
+        // event other
+        app.point = 'Bạn A có 8 điểm môn toán';
     </script>
 
 </body>
