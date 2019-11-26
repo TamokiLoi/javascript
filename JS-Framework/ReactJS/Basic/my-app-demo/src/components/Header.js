@@ -8,8 +8,11 @@ function Header() {
                 <li>
                     <a href="/">Product</a>
                 </li>
-                <li className="active">
+                <li>
                     <a href="/">State</a>
+                </li>
+                <li className="active">
+                    <a href="/">Form</a>
                 </li>
             </ul>
         </nav>

@@ -4,7 +4,7 @@ import Header from './components/Header';
 // import JSX from './components/JSX';
 // import PropsDemo from './components/PropsDemo';
 // import StateDemo from './components/StateDemo';
-import ColorDemo from './components/ColorDemo';
+import FormDemo from './components/FormDemo';
 
 class App extends Component {
 
@@ -15,7 +15,7 @@ class App extends Component {
                 {/* <JSX /> */}
                 {/* <PropsDemo /> */}
                 {/* <StateDemo /> */}
-                <ColorDemo />
+                <FormDemo />
             </div>
         );
     }
