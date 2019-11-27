@@ -11,7 +11,8 @@ class App extends Component {
         super(props);
         this.state = {
             tasks: [], // {id: unique, name, status}
-            isDisplayForm: false
+            isDisplayForm: false,
+            taskEditting: null
         }
     }
 
@@ -20,28 +21,6 @@ class App extends Component {
         if (localStorage && localStorage.getItem('tasks')) {
             this.setState({ tasks: JSON.parse(localStorage.getItem('tasks')) })
         }
-    }
-
-    onGenerateData = () => {
-        var tasks = [
-            {
-                id: this.generateId(),
-                name: 'ABC',
-                status: true
-            },
-            {
-                id: this.generateId(),
-                name: 'DCE',
-                status: false
-            },
-            {
-                id: this.generateId(),
-                name: 'FHG',
-                status: true
-            },
-        ];
-        this.setState({ tasks: tasks });
-        localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
     generateId() {
@@ -53,13 +32,78 @@ class App extends Component {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     }
 
-    onToggleForm = () => {
-        this.setState({isDisplayForm: !this.state.isDisplayForm})
+    findIndex = (id) => {
+        var { tasks } = this.state;
+        var result = -1;
+        tasks.forEach((task, index) => {
+            if (task.id === id) {
+                result = index;
+            }
+        })
+        return result;
+    }
+
+    onToggleForm = (display = true, action = null) => {
+        if (action) {
+            this.setState({ taskEditting: {} });
+        }
+        this.setState({ isDisplayForm: display })
+    }
+
+    onSaveLocalStorage(tasks) {
+        this.setState({ tasks: tasks });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        this.onToggleForm(false);
+    }
+
+    onSave = (task) => {
+        var { tasks } = this.state;
+        if (task.id) {
+            var index = this.findIndex(task.id);
+            if (index !== -1) {
+                tasks[index] = task;
+            }
+        } else {
+            task.id = this.generateId()
+            tasks.push(task);
+        }
+        this.onSaveLocalStorage(tasks);
+    }
+
+    onUpdate = (id, status = null) => {
+        var { tasks } = this.state;
+        var index = this.findIndex(id);
+        if (index !== -1) {
+            if (status) {
+                tasks[index].status = !tasks[index].status;
+                this.onSaveLocalStorage(tasks);
+            } else {
+                this.setState({
+                    taskEditting: tasks[index]
+                })
+                this.onToggleForm();
+            }
+        }
+    }
+
+    onDelete = (id) => {
+        var { tasks } = this.state;
+        var index = this.findIndex(id);
+        if (index !== -1) {
+            tasks = tasks.filter(task => task.id !== id);
+        }
+        this.onSaveLocalStorage(tasks);
     }
 
     render() {
-        var { tasks, isDisplayForm } = this.state;
-        var elmTaskForm = isDisplayForm ? <TaskForm onCloseForm={this.onToggleForm}/> : '';
+        var { tasks, isDisplayForm, taskEditting } = this.state;
+        var elmTaskForm = isDisplayForm
+            ? <TaskForm
+                onCloseForm={() => this.onToggleForm(false)}
+                onSave={this.onSave}
+                task={taskEditting}
+            />
+            : '';
 
         return (
             <div className="container">
@@ -77,14 +121,9 @@ class App extends Component {
                     <div className={isDisplayForm ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
                         {/* show form task */}
                         <button type="button" className="btn btn-primary"
-                            onClick={this.onToggleForm}>
+                            onClick={() => this.onToggleForm(!isDisplayForm, 'new')}>
                             <span className="fa fa-plus mr-5"></span>
                             Add Work
-                        </button>
-
-                        <button type="button" className="btn btn-danger ml-5"
-                            onClick={this.onGenerateData}>
-                            Generate Data
                         </button>
 
                         {/* search-filter */}
@@ -98,7 +137,11 @@ class App extends Component {
 
                         {/* task list */}
                         <div className="row mt-15">
-                            <Tasks tasks={tasks} />
+                            <Tasks
+                                tasks={tasks}
+                                onUpdate={this.onUpdate}
+                                onDelete={this.onDelete}
+                            />
                         </div>
                     </div>
                 </div>

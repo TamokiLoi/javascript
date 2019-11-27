@@ -2,23 +2,64 @@ import React, { Component } from 'react';
 
 class TaskForm extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = this.setDefaultState();
+    }
+
+    componentDidMount() {
+        if (this.props.task) {
+            this.setState(this.setDefaultState(this.props.task));
+        }
+    }
+
+    setDefaultState(task = null) {
+        return {
+            id: task ? task.id : '',
+            name: task ? task.name : '',
+            status: task ? task.status : false
+        }
+    }
+
+    onChange = (event) => {
+        var value = event.target.value;
+        if (event.target.name === 'status') {
+            value = event.target.value === 'true' ? true : false;
+        }
+        this.setState({ [event.target.name]: value })
+    }
+
+    onSubmit = (event) => {
+        event.preventDefault();
+        this.props.onSave(this.state);
+    }
+
+    onReset = () => {
+        this.setState(this.setDefaultState())
+    }
+
     render() {
+        var { id } = this.state;
+
         return (
             <div className="panel panel-warning">
                 <div className="panel-heading">
                     <h3 className="panel-title">
-                        Add Work
-                        <span className="fa fa-times-circle text-right" onClick={() => this.props.onCloseForm()}></span>
+                        {id ? 'Update Work' : 'Add Work'}
+                        <span className="fa fa-times-circle text-right"
+                            onClick={this.props.onCloseForm}></span>
                     </h3>
                 </div>
                 <div className="panel-body">
-                    <form>
+                    <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label>Name</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 name="name"
+                                value={this.state.name}
+                                onChange={this.onChange}
                             />
                         </div>
 
@@ -27,9 +68,11 @@ class TaskForm extends Component {
                             <select
                                 className="form-control"
                                 name="status"
+                                value={this.state.status}
+                                onChange={this.onChange}
                             >
-                                <option value="0">InActive</option>
-                                <option value="1">Active</option>
+                                <option value={false}>InActive</option>
+                                <option value={true}>Active</option>
                             </select>
                         </div>
 
@@ -40,7 +83,7 @@ class TaskForm extends Component {
                                 Save
                             </button>&nbsp;
                             <button type="reset" className="btn btn-danger"
-                            >
+                                onClick={this.onReset}>
                                 <span className="fa fa-close mr-5"></span>
                                 Cancel
                             </button>
