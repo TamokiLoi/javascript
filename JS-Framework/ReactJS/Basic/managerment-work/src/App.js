@@ -43,17 +43,34 @@ class App extends Component {
         return result;
     }
 
-    onToggleForm = (display = true, action = null) => {
-        if (action) {
-            this.setState({ taskEditting: {} });
+    onToggleForm = (display = true, status = null) => {
+        if (status) {
+            this.setState({
+                taskEditting: {
+                    id: '',
+                    name: '',
+                    status: false
+                }
+            });
         }
-        this.setState({ isDisplayForm: display })
+        if (this.state.isDisplayForm && this.state.taskEditting.id) {
+            this.setState({ isDisplayForm: true });
+        } else {
+            this.setState({ isDisplayForm: display });
+        }
+    }
+
+    onCloseForm = () => {
+        this.setState({ isDisplayForm: false });
     }
 
     onSaveLocalStorage(tasks) {
-        this.setState({ tasks: tasks });
+        this.setState({
+            tasks: tasks,
+            taskEditting: null
+        });
         localStorage.setItem('tasks', JSON.stringify(tasks));
-        this.onToggleForm(false);
+        this.onCloseForm();
     }
 
     onSave = (task) => {
@@ -64,8 +81,10 @@ class App extends Component {
                 tasks[index] = task;
             }
         } else {
-            task.id = this.generateId()
-            tasks.push(task);
+            task.id = this.generateId();
+            if (task.name) {
+                tasks.push(task);
+            }
         }
         this.onSaveLocalStorage(tasks);
     }

@@ -4,13 +4,20 @@ class TaskForm extends Component {
 
     constructor(props) {
         super(props);
+        // this.state = this.setDefaultState();
         this.state = this.setDefaultState();
     }
 
-    componentDidMount() {
-        if (this.props.task) {
-            this.setState(this.setDefaultState(this.props.task));
+    static getDerivedStateFromProps(nextProps, prevState) {
+        var { task } = nextProps;
+        if (task && task.id !== prevState.id) {
+            return {
+                id: nextProps.task.id,
+                name: nextProps.task.name,
+                status: nextProps.task.status,
+            };
         }
+        return null;
     }
 
     setDefaultState(task = null) {
@@ -35,7 +42,7 @@ class TaskForm extends Component {
     }
 
     onReset = () => {
-        this.setState(this.setDefaultState())
+        this.setState(this.setDefaultState(this.props.task));
     }
 
     render() {
