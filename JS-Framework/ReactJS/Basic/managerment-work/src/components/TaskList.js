@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
 
-class Tasks extends Component {
+class TaskList extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            filterName: '',
+            filterStatus: -1
+        }
+    }
+
+    onChange = (event) => {
+        this.props.onFilter(
+            event.target.name === 'filterName' ? event.target.value: this.state.filterName,
+            event.target.name === 'filterStatus' ? event.target.value: this.state.filterStatus
+        )
+        this.setState({ [event.target.name]: event.target.value });
+    }
 
     render() {
+        var { filterName, filterStatus } = this.state;
         var { tasks } = this.props;
         var elmTasks = tasks.map((task, index) => {
             return <TaskItem
@@ -30,10 +47,20 @@ class Tasks extends Component {
                         <tr>
                             <td></td>
                             <td>
-                                <input type="text" className="form-control" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="filterName"
+                                    value={filterName}
+                                    onChange={this.onChange}
+                                />
                             </td>
                             <td>
-                                <select className="form-control">
+                                <select className="form-control"
+                                    name="filterStatus"
+                                    value={filterStatus}
+                                    onChange={this.onChange}
+                                >
                                     <option value="-1">All</option>
                                     <option value="0">InActive</option>
                                     <option value="1">Active</option>
@@ -49,4 +76,4 @@ class Tasks extends Component {
     }
 }
 
-export default Tasks;
+export default TaskList;

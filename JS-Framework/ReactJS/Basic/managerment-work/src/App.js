@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import TaskForm from './components/TaskForm';
-import Search from './components/Search';
-import Filter from './components/Filter';
-import Tasks from './components/Tasks';
+import TaskSearch from './components/TaskSearch';
+import TaskSort from './components/TaskSort';
+import TaskList from './components/TaskList';
+import { findIndex } from 'lodash';
 
 class App extends Component {
 
@@ -12,7 +13,15 @@ class App extends Component {
         this.state = {
             tasks: [], // {id: unique, name, status}
             isDisplayForm: false,
-            taskEditting: null
+            taskEditting: null,
+            filter: {
+                name: '',
+                status: -1
+            },
+            sort: {
+                by: 'name',
+                value: 1
+            }
         }
     }
 
@@ -33,14 +42,7 @@ class App extends Component {
     }
 
     findIndex = (id) => {
-        var { tasks } = this.state;
-        var result = -1;
-        tasks.forEach((task, index) => {
-            if (task.id === id) {
-                result = index;
-            }
-        })
-        return result;
+        return findIndex(this.state.tasks, (task) => { return task.id === id; });
     }
 
     onToggleForm = (display = true, status = null) => {
@@ -77,14 +79,10 @@ class App extends Component {
         var { tasks } = this.state;
         if (task.id) {
             var index = this.findIndex(task.id);
-            if (index !== -1) {
-                tasks[index] = task;
-            }
+            if (index !== -1) tasks[index] = task;
         } else {
             task.id = this.generateId();
-            if (task.name) {
-                tasks.push(task);
-            }
+            if (task.name) tasks.push(task);
         }
         this.onSaveLocalStorage(tasks);
     }
@@ -97,9 +95,7 @@ class App extends Component {
                 tasks[index].status = !tasks[index].status;
                 this.onSaveLocalStorage(tasks);
             } else {
-                this.setState({
-                    taskEditting: tasks[index]
-                })
+                this.setState({ taskEditting: tasks[index] });
                 this.onToggleForm();
             }
         }
@@ -114,8 +110,50 @@ class App extends Component {
         this.onSaveLocalStorage(tasks);
     }
 
+    onSetValueFilter = (name = '', status = -1) => {
+        this.setState({
+            filter: {
+                name: name,
+                status: +status
+            }
+        });
+    }
+
+    onSort = (sort) => {
+        this.setState({ sort: sort });
+    }
+
     render() {
-        var { tasks, isDisplayForm, taskEditting } = this.state;
+        var { tasks, isDisplayForm, taskEditting, filter, sort } = this.state;
+
+        // filter & search
+        if (filter) {
+            if (filter.name) {
+                tasks = tasks.filter((task) => {
+                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
+                })
+            }
+            tasks = tasks.filter((task) => {
+                if (filter.status === -1) return task;
+                else return task.status === (filter.status === 1 ? true : false);
+            })
+        }
+
+        // sort
+        if (sort && sort.by === 'name') {
+            tasks.sort((a, b) => {
+                if (a.name > b.name) return sort.value;
+                else if (a.name < b.name) return -sort.value;
+                else return 0;
+            });
+        } else {
+            tasks.sort((a, b) => {
+                if (a.status > b.status) return -sort.value;
+                else if (a.status < b.status) return sort.value;
+                else return 0;
+            });
+        }
+
         var elmTaskForm = isDisplayForm
             ? <TaskForm
                 onCloseForm={() => this.onToggleForm(false)}
@@ -148,18 +186,19 @@ class App extends Component {
                         {/* search-filter */}
                         <div className="row mt-15">
                             {/* search */}
-                            <Search />
+                            <TaskSearch onSearch={this.onSetValueFilter} />
 
-                            {/* filter */}
-                            <Filter />
+                            {/* sort */}
+                            <TaskSort onSort={this.onSort} />
                         </div>
 
                         {/* task list */}
                         <div className="row mt-15">
-                            <Tasks
+                            <TaskList
                                 tasks={tasks}
                                 onUpdate={this.onUpdate}
                                 onDelete={this.onDelete}
+                                onFilter={this.onSetValueFilter}
                             />
                         </div>
                     </div>
