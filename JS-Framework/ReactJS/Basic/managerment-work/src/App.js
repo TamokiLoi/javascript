@@ -6,6 +6,8 @@ import TaskSort from './components/TaskSort';
 import TaskList from './components/TaskList';
 import { findIndex } from 'lodash';
 
+import Demo from './trainning/Demo';
+
 class App extends Component {
 
     constructor(props) {
