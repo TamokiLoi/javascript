@@ -1,31 +1,40 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/index';
 
 class TaskForm extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = this.setDefaultState();
         this.state = this.setDefaultState();
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        var { task } = nextProps;
-        if (task && task.id !== prevState.id) {
-            return {
-                id: nextProps.task.id,
-                name: nextProps.task.name,
-                status: nextProps.task.status,
-            };
+    componentDidMount() {
+        if (this.props.taskEditing && this.props.taskEditing.id !== null) {
+            this.onSetState(this.props.taskEditing);
+        } else {
+            this.onClear();
         }
-        return null;
     }
 
-    setDefaultState(task = null) {
-        return {
-            id: task ? task.id : '',
-            name: task ? task.name : '',
-            status: task ? task.status : false
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.taskEditing) {
+            this.onSetState(nextProps.taskEditing);
+        } else {
+            this.onClear();
         }
+    }
+
+    onSetState = (task = {}) => {
+        this.setState(this.setDefaultState(task));
+    }
+
+    setDefaultState = (task = {}) => {
+        return {
+            id: task.id ? task.id : '',
+            name: task.name ? task.name : '',
+            status: task.status ? task.status : false
+        };
     }
 
     onChange = (event) => {
@@ -38,21 +47,21 @@ class TaskForm extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        this.props.onSave(this.state);
+        this.props.onSaveTask(this.state);
+        this.props.onCloseForm();
+        this.onClear();
     }
 
-    onReset = () => {
-        this.setState(this.setDefaultState(this.props.task));
-    }
+    onClear = () => { this.onSetState(this.props.taskEditing); }
 
     render() {
-        var { id } = this.state;
+        if (!this.props.isDisplayForm) return '';
 
         return (
             <div className="panel panel-warning">
                 <div className="panel-heading">
                     <h3 className="panel-title">
-                        {id ? 'Update Work' : 'Add Work'}
+                        {this.props.taskEditing.id ? 'Update Work' : 'Add Work'}
                         <span className="fa fa-times-circle text-right"
                             onClick={this.props.onCloseForm}></span>
                     </h3>
@@ -89,8 +98,8 @@ class TaskForm extends Component {
                                 <span className="fa fa-plus mr-5"></span>
                                 Save
                             </button>&nbsp;
-                            <button type="reset" className="btn btn-danger"
-                                onClick={this.onReset}>
+                            <button type="button" className="btn btn-danger"
+                                onClick={this.onClear}>
                                 <span className="fa fa-close mr-5"></span>
                                 Cancel
                             </button>
@@ -102,4 +111,18 @@ class TaskForm extends Component {
     }
 }
 
-export default TaskForm;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isDisplayForm: state.isDisplayForm,
+        taskEditing: state.taskEditing,
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onSaveTask: (task) => { dispatch(actions.saveTask(task)); },
+        onCloseForm: () => { dispatch(actions.closeForm()); }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

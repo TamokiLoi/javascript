@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/index';
 
 class TaskSearch extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            keyword: ''
-        }
+        this.state = { keyword: '' }
     }
 
-    onChange = (event) => {
-        this.setState({
-            keyword: event.target.value
-        })
-    }
+    onChange = (event) => { this.setState({ keyword: event.target.value }) }
+
+    onSearch = () => { this.props.onFilter({ name: 'filterName' }) }
 
     render() {
         var { keyword } = this.state;
@@ -30,7 +28,7 @@ class TaskSearch extends Component {
                     />
                     <span className="input-group-btn">
                         <button type="button" className="btn btn-primary"
-                            onClick={() => this.props.onSearch(keyword)}>
+                            onClick={this.onSearch}>
                             <span className="fa fa-search mr-5"></span>
                             Search
                         </button>
@@ -41,4 +39,10 @@ class TaskSearch extends Component {
     }
 }
 
-export default TaskSearch;
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onFilter: (filter) => { dispatch(actions.filterTable(filter)); },
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TaskSearch);
