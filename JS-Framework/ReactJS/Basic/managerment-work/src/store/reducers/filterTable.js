@@ -5,7 +5,10 @@ var initialState = { name: '', status: -1 };
 var filterTableReducer = (state = initialState, action) => {
     switch (action.type) {
         case TYPES.FILTER_TABLE:
-            return action.filter;
+            return {
+                name: action.filter.name ? action.filter.name : initialState.name,
+                status: action.filter.status ? action.filter.status : initialState.status
+            };
         default:
             return state;
     }
