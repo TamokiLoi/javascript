@@ -16,7 +16,7 @@ class TaskList extends Component {
     onChange = (event) => {
         this.props.onFilter({
             name: event.target.name === 'filterName' ? event.target.value : this.state.filterName,
-            status: event.target.name === 'filterStatus' ? +event.target.value : this.state.filterStatus
+            status: event.target.name === 'filterStatus' ? event.target.value : this.state.filterStatus
         })
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -36,6 +36,8 @@ class TaskList extends Component {
                 if (filter.status === -1) return task;
                 else return task.status === (filter.status === 1 ? true : false);
             });
+            console.log(tasks)
+            console.log(filter)
         }
 
         // sort

@@ -10,7 +10,6 @@ class TaskSearch extends Component {
     }
 
     onChange = (event) => { this.setState({ keyword: event.target.value }) }
-
     onSearch = () => { this.props.onFilter({ name: this.state.keyword }) }
 
     render() {

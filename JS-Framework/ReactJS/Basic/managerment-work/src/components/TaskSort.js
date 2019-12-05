@@ -85,7 +85,7 @@ class TaskSort extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onSort: (sort) => { dispatch(actions.sortTable(sort)); },
+        onSort: (sort) => { dispatch(actions.sortTable(sort)); }
     }
 }
 

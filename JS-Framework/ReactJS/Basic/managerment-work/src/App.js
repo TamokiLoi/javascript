@@ -9,34 +9,6 @@ import * as actions from './store/actions/index';
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            tasks: [],
-            filter: {
-                name: '',
-                status: -1
-            },
-            sort: {
-                by: 'name',
-                value: 1
-            }
-        }
-    }
-
-    onSetValueFilter = (name = '', status = -1) => {
-        this.setState({
-            filter: {
-                name: name,
-                status: +status
-            }
-        });
-    }
-
-    onSort = (sort) => {
-        this.setState({ sort: sort });
-    }
-
     onShowFormAdd = () => {
         var { taskEditing } = this.props;
         (taskEditing && taskEditing.id) ? this.props.onOpenForm() : this.props.onToggleForm();
@@ -44,36 +16,7 @@ class App extends Component {
     }
 
     render() {
-        var { tasks, filter, sort } = this.state;
         var { isDisplayForm } = this.props;
-
-        // filter & search
-        if (filter) {
-            if (filter.name) {
-                tasks = tasks.filter((task) => {
-                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
-                })
-            }
-            tasks = tasks.filter((task) => {
-                if (filter.status === -1) return task;
-                else return task.status === (filter.status === 1 ? true : false);
-            })
-        }
-
-        // sort
-        if (sort && sort.by === 'name') {
-            tasks.sort((a, b) => {
-                if (a.name > b.name) return sort.value;
-                else if (a.name < b.name) return -sort.value;
-                else return 0;
-            });
-        } else {
-            tasks.sort((a, b) => {
-                if (a.status > b.status) return -sort.value;
-                else if (a.status < b.status) return sort.value;
-                else return 0;
-            });
-        }
 
         return (
             <div className="container">
