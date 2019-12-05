@@ -10,7 +10,6 @@ class App extends Component {
         return (
             <div>
                 <div>
-                    
                     {/* <!-- Header --> */}
                     <Header />
                     <main id="mainContainer">

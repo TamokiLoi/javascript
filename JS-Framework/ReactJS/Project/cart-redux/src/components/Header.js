@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 class Header extends Component {
     render() {
+        var someValidPath = null;
+
         return (
             <header>
                 <ul id="slide-out" className="side-nav hidden custom-scrollbar sn-bg-2 ps ps--theme_default" data-ps-id="c27390a3-9efc-e0d8-197a-ab96d73a156a">
                     <li>
                         <div className="logo-wrapper waves-light waves-effect waves-light">
-                            <a>
+                            <a href={someValidPath}>
                                 <img src="http://mdbootstrap.com/img/logo/mdb-transparent.png" alt="" className="img-fluid flex-center" />
                             </a>
                         </div>
@@ -15,22 +17,22 @@ class Header extends Component {
                     <li>
                         <ul className="social">
                             <li>
-                                <a className="icons-sm fb-ic">
+                                <a className="icons-sm fb-ic" href={someValidPath}>
                                     <i className="fa fa-facebook"> </i>
                                 </a>
                             </li>
                             <li>
-                                <a className="icons-sm pin-ic">
+                                <a className="icons-sm pin-ic" href={someValidPath}>
                                     <i className="fa fa-pinterest"> </i>
                                 </a>
                             </li>
                             <li>
-                                <a className="icons-sm gplus-ic">
+                                <a className="icons-sm gplus-ic" href={someValidPath}>
                                     <i className="fa fa-google-plus"> </i>
                                 </a>
                             </li>
                             <li>
-                                <a className="icons-sm tw-ic">
+                                <a className="icons-sm tw-ic" href={someValidPath}>
                                     <i className="fa fa-twitter"> </i>
                                 </a>
                             </li>
@@ -47,7 +49,7 @@ class Header extends Component {
 
                         <ul className="collapsible collapsible-accordion">
                             <li>
-                                <a className="collapsible-header waves-effect arrow-r">
+                                <a className="collapsible-header waves-effect arrow-r" href={someValidPath}>
                                     <i className="fa fa-shopping-bag"></i> Product Page
                         <i className="fa fa-angle-down rotate-icon"></i>
                                 </a>
@@ -66,9 +68,9 @@ class Header extends Component {
                                 </div>
                             </li>
                             <li className="active">
-                                <a className="collapsible-header waves-effect arrow-r active">
+                                <a className="collapsible-header waves-effect arrow-r active" href={someValidPath}>
                                     <i className="fa fa-shopping-cart"></i> Cart Pages
-                        <i className="fa fa-angle-down rotate-icon"></i>
+                                    <i className="fa fa-angle-down rotate-icon"></i>
                                 </a>
                                 <div className="collapsible-body">
                                     <ul>
@@ -94,9 +96,9 @@ class Header extends Component {
                                 </div>
                             </li>
                             <li>
-                                <a className="collapsible-header waves-effect arrow-r">
+                                <a className="collapsible-header waves-effect arrow-r" href={someValidPath}>
                                     <i className="fa fa-dashboard"></i> Homepages
-                        <i className="fa fa-angle-down rotate-icon"></i>
+                                    <i className="fa fa-angle-down rotate-icon"></i>
                                 </a>
                                 <div className="collapsible-body">
                                     <ul>
@@ -122,9 +124,9 @@ class Header extends Component {
                                 </div>
                             </li>
                             <li>
-                                <a className="collapsible-header waves-effect arrow-r">
+                                <a className="collapsible-header waves-effect arrow-r" href={someValidPath}>
                                     <i className="fa fa-desktop"></i> Post Pages
-                        <i className="fa fa-angle-down rotate-icon"></i>
+                                    <i className="fa fa-angle-down rotate-icon"></i>
                                 </a>
                                 <div className="collapsible-body">
                                     <ul>
@@ -147,9 +149,9 @@ class Header extends Component {
                                 </div>
                             </li>
                             <li>
-                                <a className="collapsible-header waves-effect arrow-r">
+                                <a className="collapsible-header waves-effect arrow-r" href={someValidPath}>
                                     <i className="fa fa-diamond"></i> Category Pages
-                        <i className="fa fa-angle-down rotate-icon"></i>
+                                    <i className="fa fa-angle-down rotate-icon"></i>
                                 </a>
                                 <div className="collapsible-body">
                                     <ul>
@@ -188,7 +190,7 @@ class Header extends Component {
                 <nav className="navbar fixed-top navbar-toggleable-md navbar-expand-lg navbar-dark scrolling-navbar double-nav">
 
                     <div className="float-left">
-                        <a data-activates="slide-out" className="button-collapse">
+                        <a data-activates="slide-out" className="button-collapse" href={someValidPath}>
                             <i className="fa fa-bars"></i>
                         </a>
                     </div>
@@ -196,7 +198,7 @@ class Header extends Component {
                     <div className="breadcrumb-dn mr-auto">
                         <ol className="breadcrumb header-breadcrumb">
                             <li className="breadcrumb-item">
-                                <a>Trang Chủ</a>
+                                <a href={someValidPath}>Trang Chủ</a>
                             </li>
                         </ol>
                     </div>
@@ -204,12 +206,12 @@ class Header extends Component {
                     <ul className="nav navbar-nav nav-flex-icons ml-auto">
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle waves-effect waves-light" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                                aria-expanded="false" href={someValidPath}>
                                 <i className="fa fa-user"></i> Tài Khoản</a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                <a className="dropdown-item waves-effect waves-light">Đăng Ký</a>
-                                <a className="dropdown-item waves-effect waves-light">Đăng Nhập</a>
-                                <a className="dropdown-item waves-effect waves-light">Đăng Xuất</a>
+                                <a className="dropdown-item waves-effect waves-light" href={someValidPath}>Đăng Ký</a>
+                                <a className="dropdown-item waves-effect waves-light" href={someValidPath}>Đăng Nhập</a>
+                                <a className="dropdown-item waves-effect waves-light" href={someValidPath}>Đăng Xuất</a>
                             </div>
                         </li>
                     </ul>

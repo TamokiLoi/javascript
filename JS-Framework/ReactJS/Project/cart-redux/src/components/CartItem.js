@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class CartItem extends Component {
     render() {
+        var someValidPath = null;
+
         return (
             <tr>
                 <th scope="row">
@@ -19,11 +21,11 @@ class CartItem extends Component {
                     <div className="btn-group radio-group" data-toggle="buttons">
                         <label className="btn btn-sm btn-primary
                             btn-rounded waves-effect waves-light">
-                            <a>—</a>
+                            <a href={someValidPath}>—</a>
                         </label>
                         <label className="btn btn-sm btn-primary
                             btn-rounded waves-effect waves-light">
-                            <a>+</a>
+                            <a href={someValidPath}>+</a>
                         </label>
                     </div>
                 </td>
