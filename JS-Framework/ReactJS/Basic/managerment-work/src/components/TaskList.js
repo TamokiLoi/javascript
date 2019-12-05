@@ -36,8 +36,6 @@ class TaskList extends Component {
                 if (filter.status === -1) return task;
                 else return task.status === (filter.status === 1 ? true : false);
             });
-            console.log(tasks)
-            console.log(filter)
         }
 
         // sort
