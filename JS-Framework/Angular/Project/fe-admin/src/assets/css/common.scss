@@ -1,0 +1,77 @@
+// define common css
+.all-disabled {
+  pointer-events: none;
+}
+
+.pad {
+  padding: 15px;
+}
+
+.pad-lr {
+  padding: 0 15px;
+}
+
+.pad-tb {
+  padding: 15px 0;
+}
+
+.pad-t {
+  padding: 15px 0 0 0;
+}
+
+.pad-r {
+  padding: 0 15px 0 0;
+}
+
+.pad-b {
+  padding: 0 0 15px 0;
+}
+
+.pad-l {
+  padding: 0 0 0 15px;
+}
+
+.pad-t3 {
+  padding: 0 15px 15px 15px;
+}
+
+.pad-b3 {
+  padding: 15px 15px 0 15px;
+}
+
+.no-pad {
+  padding: 0;
+}
+
+.ma-tb {
+  margin: 15px 0;
+}
+
+.ma-lr {
+  margin: 0 15px;
+}
+
+.ma-b {
+  margin-bottom: 15px;
+}
+
+.no-ma {
+  margin: 0;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+
+.input-disabled {
+  pointer-events: none;
+  background-color: #eee !important;
+  opacity: 1;
+}
+
+.bg-disabled {
+    background-color: #eee !important;
+    opacity: 1;
+}

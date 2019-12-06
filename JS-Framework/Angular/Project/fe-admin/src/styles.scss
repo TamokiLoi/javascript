@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import "assets/css/color.scss";
+@import "assets/css/common.scss";
+@import "assets/css/form.scss";
+@import "assets/css/form-view.scss";
+@import "assets/css/table.scss";
+@import "assets/css/button.scss";
+@import "assets/css/link.scss";
+@import "assets/css/dialog.scss";
+@import "assets/css/ng-select.scss";
+
+body .ui-widget {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-weight: 400;
+}

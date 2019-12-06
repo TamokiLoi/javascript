@@ -1,0 +1,208 @@
+<div class="layout-block">
+    <div class="content-header">
+        <h1 class="block-title-lg">
+            {{'Language Translation' | translate}}
+        </h1>
+    </div>
+
+    <!-- search -->
+    <div class="block-content search">
+        <div class="row no-ma">
+            <form [formGroup]="formSearch" (ngSubmit)="onSearch()" novalidate>
+                <div class="block-search">
+                    <label class="control-label">
+                        Language
+                    </label>
+                    <ng-select formControlName="language" class="form-control" (change)="onSearch(true)">
+                        <ng-option *ngFor="let item of languages" [value]="item.code">
+                            {{item.code_value}}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="block-search">
+                    <label class="control-label">
+                        Category
+                    </label>
+                    <ng-select formControlName="category" class="form-control" placeholder="Select">
+                        <ng-option *ngFor="let item of categories" [value]="item.code">
+                            {{item.code_value}}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="block-search">
+                    <label class="control-label">
+                        Message Code
+                    </label>
+                    <input pInputText formControlName="message_code" name="message_code" class="form-control" />
+                </div>
+                <div class="block-search">
+                    <label class="control-label">
+                        Message Translation
+                    </label>
+                    <input pInputText formControlName="message_translation" name="message_translation"
+                        class="form-control" />
+                </div>
+
+
+                <div class="block-search">
+                    <label class="control-label">&nbsp;</label>
+                    <div class="group-btn-search">
+                        <button pButton type="submit" icon="fa fa-search" class="btn-outline-info btn"
+                            label="Search"></button>
+                        <button pButton type="button" (click)="onReset()" icon="fa fa-close"
+                            class="btn-outline-primary btn" label="Reset"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- button add -->
+    <div class="row text-right ma-tb">
+        <button pButton icon="fa fa-plus" class="btn-outline-info" label="Add New"
+            (click)="display = !display"></button>
+    </div>
+
+    <!-- table -->
+    <div class="row no-ma">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                            <div class="row pad-lr">
+                                <p-table #table [columns]="cols" [value]="data" [scrollable]="true" scrollHeight="365px"
+                                    (onLazyLoad)="onSort($event)" [lazy]="true" sortMode="single">
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th [pSortableColumn]="'category'" style="width: 15%;">
+                                                Category
+                                                <p-sortIcon [field]="'category'" *ngIf="data.length > 0">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th [pSortableColumn]="'message_code'">
+                                                Message Code
+                                                <p-sortIcon [field]="'message_code'" *ngIf="data.length > 0">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th [pSortableColumn]="'message_translation'">
+                                                Translation
+                                                <p-sortIcon [field]="'message_translation'" *ngIf="data.length > 0">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th style="width: 8%;">Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData>
+                                        <tr>
+                                            <!-- category -->
+                                            <td pEditableColumn style="width: 15%;">
+                                                <p-cellEditor>
+                                                    <ng-template pTemplate="input">
+                                                        <ng-select [(ngModel)]="rowData.category_code"
+                                                            class="form-control" appendTo="body"
+                                                            (change)="onUpdate(rowData, rowData.category_code)"
+                                                            (focus)="onFocus(rowData.category_code)">
+                                                            <ng-option *ngFor="let item of categories"
+                                                                [value]="item.code">
+                                                                {{item.code_value}}</ng-option>
+                                                        </ng-select>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="output">
+                                                        {{rowData.category_code}}
+                                                    </ng-template>
+                                                </p-cellEditor>
+                                            </td>
+
+                                            <!-- code -->
+                                            <td class="bg-disabled" pTooltip="{{rowData.message_code}}">
+                                                {{rowData.message_code}} </td>
+
+                                            <!-- translation -->
+                                            <td pEditableColumn pTooltip="{{rowData.message_translation}}">
+                                                <p-cellEditor>
+                                                    <ng-template pTemplate="input">
+                                                        <input pInputText [(ngModel)]="rowData.message_translation"
+                                                            class="form-control"
+                                                            (blur)="onUpdate(rowData, rowData.message_translation)"
+                                                            (focus)="onFocus(rowData.message_translation)" />
+                                                    </ng-template>
+                                                    <ng-template pTemplate="output">
+                                                        {{rowData.message_translation}}
+                                                    </ng-template>
+                                                </p-cellEditor>
+                                            </td>
+
+                                            <!-- action btn -->
+                                            <td style="width: 8%;" class="text-center">
+                                                <span *ngIf="rowData.id !== 1 && rowData.id !== 2">
+                                                    <a class="link link-danger" href="javascript:void(0)"
+                                                        (click)="onDelete(rowData.id)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div class="text-center no-data" *ngIf="data.length == 0">
+                                    <span style="text-transform: initial;">Data Not Found</span>
+                                </div>
+                            </div>
+
+                            <div class="row pad-b3" *ngIf="data.length > 0">
+                                <p-paginator [rows]="paramsPagination.rows" [totalRecords]="pagination['meta']?.total"
+                                    [rowsPerPageOptions]="[10,20,50,100]" (onPageChange)="onPageChange($event)">
+                                </p-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- dialog create new language -->
+<p-dialog header="Add New Language" [(visible)]="display" [responsive]="true" showEffect="fade" [modal]="true"
+    [style]="{width: '450px'}" class="dialog" [ngClass]="{'is-active': display == true }">
+    <div class="block-content search">
+        <div class="row no-ma">
+            <form [formGroup]="formDetail" novalidate>
+                <div class="block-search ma-b">
+                    <label class="control-label">
+                        Category
+                    </label>
+                    <ng-select formControlName="category" class="form-control width100" placeholder="Select">
+                        <ng-option *ngFor="let item of categories" [value]="item.code">
+                            {{item.code_value}}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="block-search ma-b"
+                    [class.error-style]="(formDetail.get('message_code').touched && formDetail.get('message_code').invalid) || (formDetail.get('message_code').dirty && formDetail.get('message_code').invalid)">
+                    <label class="control-label">
+                        Message Code
+                    </label>
+                    <input pInputText formControlName="message_code" name="message_code"
+                        class="form-control width100 text-uppercase" />
+                    <div *ngFor="let validation of errorMessage.common">
+                        <p class="error"
+                            *ngIf="formDetail.get('message_code').hasError(validation.type) && (formDetail.get('message_code').dirty || formDetail.get('message_code').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+                <div class="block-search">
+                    <label class="control-label">
+                        Message Translation
+                    </label>
+                    <input pInputText formControlName="message_translation" name="message_translation"
+                        class="form-control width100" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <p-footer-dialog>
+        <button type="submit" pButton class="btn-outline-info btn" label="Save" [disabled]="formDetail.invalid"
+            (click)="onSubmit()"></button>
+        <button type="reset" pButton class="btn-outline-primary btn" label="Cancel" (click)="onClose()"></button>
+    </p-footer-dialog>
+</p-dialog>

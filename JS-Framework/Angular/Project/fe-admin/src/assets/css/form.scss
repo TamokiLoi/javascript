@@ -1,0 +1,159 @@
+// define layout: form, form-search, form-crud, form-error... css
+
+/* Start layout form */
+.content-header {
+  padding: 15px;
+  padding-left: 0;
+  padding-top: 0;
+}
+
+.content-header>h1 {
+  font-size: 20px;
+}
+
+.content-header>h1>small {
+  color: $color-info;
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.content-header>h1>small .fa-arrow-circle-left {
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.content-header {
+  //   background-color: rgba(34, 45, 50, 0.6) !important;
+  background-color: rgba(34, 45, 50, 0.8) !important;
+  color: $color-secondary;
+  padding: 10px 15px;
+  transition: opacity .2s ease-out;
+}
+
+.layout-block {
+  .block-content {
+    background: $color-secondary;
+    margin: 0 auto;
+    padding: 0 15px 10px 0;
+    max-width: 100%;
+    overflow-x: visible;
+    transition: opacity .2s ease-out;
+    border: 1px solid $color-border;
+  }
+
+  .block-search {
+    display: inline-block;
+    position: relative;
+    min-height: 1px;
+    padding-right: 0;
+    padding-left: 15px;
+    float: left;
+  }
+
+  .control-label {
+    padding-top: 5px;
+    width: 150px;
+    text-align: left;
+  }
+}
+
+.layout-block {
+  .form-style .sub-title {
+    margin-top: 10px;
+    padding: 1px 15px;
+    margin-bottom: 0;
+    background: $color-info;
+    color: whitesmoke;
+  }
+}
+
+/* End layout form */
+
+.form-horizontal .label-wrapper {
+  display: table;
+  float: right;
+  min-height: 28px;
+}
+
+.form-horizontal .label-wrapper .ico-help {
+  display: table-cell;
+  color: $color-info;
+  font-size: 1.17em;
+  padding-left: 6px;
+}
+
+.form-horizontal .form-group {
+  margin: 0 !important;
+}
+
+.form-control {
+  height: 30px !important;
+  padding: 0;
+  border: none;
+  width: 18rem;
+}
+
+select {
+  border: 1px solid #a6a6a6 !important;
+  border-radius: 3px !important;
+}
+
+.label-required {
+  color: $color-danger;
+  line-height: 30px;
+  margin-left: 5px;
+}
+
+.noresize {
+  resize: none;
+}
+
+.dropdown-full {
+  .ui-dropdown {
+    width: 100% !important;
+  }
+}
+
+.ui-dropdown .ui-dropdown-label {
+  padding: 4px;
+}
+
+.width100 {
+  width: 100% !important;
+
+  .ui-dropdown {
+    width: 100% !important;
+  }
+}
+
+.lh-30 {
+  line-height: 30px;
+}
+
+// style css error
+.error-style .form-control {
+  border-color: $color-danger;
+  position: relative;
+}
+
+.error-style .error {
+  display: none;
+  position: absolute;
+  bottom: 45% !important;
+  background-color: #fbdcdb;
+  border: 1px solid #f6b0ae;
+  color: $color-danger;
+  padding: 5px;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+.error-style:active .error,
+.error-style:hover .error,
+.error-style:focus .error {
+  display: block !important;
+}
+
+.txt-required {
+  color: $color-danger;
+}

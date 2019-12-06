@@ -1,0 +1,41 @@
+@import "../../../../assets/css/color.scss";
+
+.flag-image {
+  width: 35px;
+  float: right;
+}
+
+.label-language {
+  color: $color-primary;
+  font-weight: bold;
+  font-style: inherit;
+}
+
+.lang-flag {
+  a {
+    &:hover {
+      background-color: #ededed !important;
+
+
+      span {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: #ededed !important;
+
+    span {
+      color: $color-primary;
+    }
+  }
+}
+
+.lang-active {
+  background-color: #3c8dbc !important;
+
+  span {
+    color: $color-secondary;
+  }
+}

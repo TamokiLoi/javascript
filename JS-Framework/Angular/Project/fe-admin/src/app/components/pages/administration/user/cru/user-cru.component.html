@@ -1,0 +1,90 @@
+<div class="layout-block">
+    <div class="content-header">
+        <h1 class="block-title-lg">
+            {{paramAction?.title_page}}
+        </h1>
+    </div>
+
+    <form [formGroup]="formDetail" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- info -->
+        <div class="block-content search">
+            <div class="row no-ma">
+
+                <div class="block-search"
+                    [class.error-style]="(formDetail.get('username').touched && formDetail.get('username').invalid) || (formDetail.get('username').dirty && formDetail.get('username').invalid)">
+                    <label class="control-label">
+                        User Name
+                        <span class="txt-required" *ngIf="paramAction?.action != 'view'">(*)</span>
+                    </label>
+                    <input pInputText formControlName="username" name="username" minlength="6"
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['username']}}" class="form-control" />
+                    <div *ngFor="let validation of errorMessage.username">
+                        <p class="error"
+                            *ngIf="formDetail.get('username').hasError(validation.type) && (formDetail.get('username').dirty || formDetail.get('username').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <div class="block-search"
+                    [class.error-style]="(formDetail.get('password').touched && formDetail.get('password').invalid) || (formDetail.get('password').dirty && formDetail.get('password').invalid)"
+                    *ngIf="paramAction?.action != 'view'">
+                    <label class="control-label">
+                        Password
+                        <span class="txt-required" *ngIf="paramAction?.action != 'view'">(*)</span>
+                    </label>
+                    <input pInputText formControlName="password" name="password" type="password" minlength="6"
+                        class="form-control" />
+                    <div *ngFor="let validation of errorMessage.password">
+                        <p class="error"
+                            *ngIf="formDetail.get('password').hasError(validation.type) && (formDetail.get('password').dirty || formDetail.get('password').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <div class="block-search"
+                    [class.error-style]="(formDetail.get('email').touched && formDetail.get('email').invalid) || (formDetail.get('email').dirty && formDetail.get('email').invalid)">
+                    <label class="control-label">
+                        Email
+                        <span class="txt-required" *ngIf="paramAction?.action != 'view'">(*)</span>
+                    </label>
+                    <input pInputText formControlName="email" name="email" type="email" email
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['email']}}" class="form-control" />
+                    <div *ngFor="let validation of errorMessage.email">
+                        <p class="error"
+                            *ngIf="formDetail.get('email').hasError(validation.type) && (formDetail.get('email').dirty || formDetail.get('email').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <div class="block-search">
+                    <label class="control-label">
+                        Phone
+                    </label>
+                    <input pInputText formControlName="phone" name="phone"
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['phone']}}" class="form-control" />
+                </div>
+
+                <div class="block-search">
+                    <label class="control-label">
+                        Address
+                    </label>
+                    <input pInputText formControlName="address" name="address"
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['address']}}" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div class="row pad">
+            <button pButton type="submit" class="btn-outline-info btn" [disabled]="formDetail.invalid" label="Save"
+                *ngIf="paramAction?.action != 'view'"></button>
+            <button pButton class="btn-outline-primary btn" label="Back To List"
+                [routerLink]="['/administration/user']"></button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,140 @@
+<div class="layout-block">
+    <div class="content-header">
+        <h1 class="block-title-lg">
+            Users
+        </h1>
+    </div>
+
+    <!-- search -->
+    <div class="block-content search">
+        <div class="row no-ma">
+            <form [formGroup]="formSearch" (ngSubmit)="onSearch()" novalidate>
+                <div class="block-search">
+                    <label class="control-label">
+                        User
+                    </label>
+                    <input pInputText formControlName="username" name="username" class="form-control" />
+                </div>
+                <div class="block-search"
+                    [class.error-style]="(formSearch.get('email').touched && formSearch.get('email').invalid) || (formSearch.get('email').dirty && formSearch.get('email').invalid)">
+                    <label class="control-label">
+                        Email
+                    </label>
+                    <input pInputText formControlName="email" name="email" class="form-control" type="email" email />
+                    <div *ngFor="let validation of errorMessage.email">
+                        <p class="error"
+                            *ngIf="formSearch.get('email').hasError(validation.type) && (formSearch.get('email').dirty || formSearch.get('email').touched)">
+                            Invalid email address </p>
+                    </div>
+                </div>
+                <div class="block-search">
+                    <label class="control-label">
+                        Phone
+                    </label>
+                    <input pInputText formControlName="phone" name="phone" class="form-control" />
+                </div>
+                <div class="block-search">
+                    <label class="control-label">
+                        Address
+                    </label>
+                    <input pInputText formControlName="address" name="address" class="form-control" />
+                </div>
+
+                <div class="block-search">
+                    <label class="control-label">&nbsp;</label>
+                    <div class="group-btn-search">
+                        <button pButton type="submit" icon="fa fa-search" class="btn-outline-info btn"
+                            label="Search"></button>
+                        <button pButton type="reset" (click)="onReset()" icon="fa fa-close"
+                            class="btn-outline-primary btn" label="Reset"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- button add -->
+    <div class="row text-right ma-tb">
+        <button pButton icon="fa fa-plus" class="btn-outline-info" label="Add New"
+            [routerLink]="['/administration/user/new']"></button>
+    </div>
+
+    <!-- table -->
+    <div class="row no-ma">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                            <div class="row pad-lr">
+                                <p-table #table [columns]="cols" [value]="data" [scrollable]="true" scrollHeight="365px"
+                                    (onLazyLoad)="onSort($event)" [lazy]="true" sortMode="single">
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                                {{col.header}}
+                                                <p-sortIcon [field]="col.field" *ngIf="data.length > 0"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 8%;">Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                        <tr>
+                                            <td *ngFor="let col of columns" pTooltip="{{rowData[col.field]}}">
+                                                {{rowData[col.field]}}
+                                            </td>
+
+                                            <!-- action btn -->
+                                            <td style="width: 8%;" class="text-center">
+                                                <span *ngIf="rowData['id'] !== 1">
+                                                    <a class="link link-primary" href="javascript:void(0)"
+                                                        [routerLink]="['/administration/user/' + 'view/' + rowData['id']]">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a class="link link-info" href="javascript:void(0)"
+                                                        [routerLink]="['/administration/user/' + 'edit/' + rowData['id']]">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <a class="link link-danger" href="javascript:void(0)"
+                                                        (click)="delete(rowData['id'])">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div class="text-center no-data" *ngIf="data.length == 0">
+                                    <span style="text-transform: initial;">Data Not Found</span>
+                                </div>
+                            </div>
+
+                            <div class="row pad-b3" *ngIf="data.length > 0">
+                                <p-paginator [rows]="paramsPagination.rows" [totalRecords]="pagination['meta']?.total"
+                                    [rowsPerPageOptions]="[10,20,50,100]" (onPageChange)="onPageChange($event)">
+                                </p-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- demo dialog -->
+<!-- <p-dialog header="Godfather I" [(visible)]="display" [modal]="true" [responsive]="true"
+    [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000" class="dialog"
+    [ngClass]="{'is-active': display == true }">
+    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+        His beloved son Michael has just come home from the war, but does not intend to become part of his father's
+        business.
+        Through Michael's life the nature of the family business becomes clear. The business of the family is just like
+        the head of the family,
+        kind and benevolent to those who give respect,
+        but given to ruthless violence whenever anything stands against the good of the family.</p>
+    <p-footer-dialog>
+        <button type="button" pButton class="btn-outline-info btn" label="Yes" (click)="display=false"></button>
+        <button type="button" pButton class="btn-outline-primary btn" label="No" (click)="display=false"></button>
+    </p-footer-dialog>
+</p-dialog> -->

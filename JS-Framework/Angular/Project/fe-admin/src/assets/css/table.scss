@@ -1,0 +1,46 @@
+// define table css
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+  border-color: #eae3e3;
+}
+
+.ui-table .ui-table-tbody>tr>td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ui-table .ui-table-thead>tr:last-child>th {
+  border-bottom: none;
+}
+
+.no-data {
+  border: 1px solid #cccccc;
+  padding: 15px;
+}
+
+.badge-icon {
+    padding: .2em .6em .3em;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.active-badge {
+    background-color: #1CA979 !important;
+    color: #ffffff !important;
+}
+
+.deactive-badge{
+    background-color: #fdb45c !important;
+    color: #ffffff !important;
+}

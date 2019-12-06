@@ -1,0 +1,60 @@
+<p-toast></p-toast>
+<div class="hold-transition login-page login-body">
+    <div class="logo">
+        <img class="img-responsive" src="../../../../assets/img/logo-white.gif">
+    </div>
+    <div class="login-box" style="width: 380px;">
+        <div class="login-logo login-page">
+            <h3>
+                <span>Login</span>
+            </h3>
+        </div>
+        <div class="login-box-body">
+            <div class="loading-div">
+                <span *ngIf="loading" class="loading-icon text-center">
+                    <img src="../../../../assets/img/loading-timeline.gif" alt="Loading">
+                </span>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+                <!-- username -->
+                <div class="form-group has-feedback"
+                    [class.error-style]="(form.get('username').touched && form.get('username').invalid) || (form.get('username').dirty && form.get('username').invalid)">
+                    <input pInputText formControlName="username" name="username" class="form-control" placeholder="UserName" />
+                    <span class="fa fa-user form-control-feedback"></span>
+                    <div *ngFor="let validation of errorMessage.username">
+                        <p class="error"
+                            *ngIf="form.get('username').hasError(validation.type) && (form.get('username').dirty || form.get('username').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <!-- password -->
+                <div class="form-group has-feedback"
+                    [class.error-style]="(form.get('password').touched && form.get('password').invalid) || (form.get('password').dirty && form.get('password').invalid)">
+                    <input pInputText type="password" formControlName="password" name="password" class="form-control"
+                        placeholder="Password" />
+                    <span class="fa fa-lock form-control-feedback"></span>
+                    <div *ngFor="let validation of errorMessage.password">
+                        <p class="error"
+                            *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <!-- forgot password -->
+                <div class="form-group clearfix">
+                    <a href="#/forgot-password" class="pull-right forgot-password">Forgot Password</a>
+                </div>
+
+                <!-- submit btn -->
+                <div class="row text-center">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="form.invalid">Sign
+                            In</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

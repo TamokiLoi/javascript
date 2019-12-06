@@ -1,0 +1,77 @@
+<div class="layout-block">
+    <div class="content-header">
+        <h1 class="block-title-lg">
+            {{paramAction?.title_page}}
+        </h1>
+    </div>
+
+    <form [formGroup]="formDetail" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- info -->
+        <div class="block-content search">
+            <div class="row no-ma">
+
+                <div class="block-search"
+                    [class.error-style]="(formDetail.get('md_type').touched && formDetail.get('md_type').invalid) || (formDetail.get('md_type').dirty && formDetail.get('md_type').invalid)">
+                    <label class="control-label">
+                        Type
+                        <span class="txt-required" *ngIf="paramAction?.action != 'view'">(*)</span>
+                    </label>
+                    <input pInputText formControlName="md_type" name="md_type" maxlength="4"
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['md_type']}}" class="form-control text-uppercase" />
+                    <div *ngFor="let validation of errorMessage.common">
+                        <p class="error"
+                            *ngIf="formDetail.get('md_type').hasError(validation.type) && (formDetail.get('md_type').dirty || formDetail.get('md_type').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <div class="block-search"
+                    [class.error-style]="(formDetail.get('md_name').touched && formDetail.get('md_name').invalid) || (formDetail.get('md_name').dirty && formDetail.get('md_name').invalid)">
+                    <label class="control-label">
+                        Name
+                        <span class="txt-required" *ngIf="paramAction?.action != 'view'">(*)</span>
+                    </label>
+                    <input pInputText formControlName="md_name" name="md_name"
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['md_name']}}" class="form-control" />
+                    <div *ngFor="let validation of errorMessage.common">
+                        <p class="error"
+                            *ngIf="formDetail.get('md_name').hasError(validation.type) && (formDetail.get('md_name').dirty || formDetail.get('md_name').touched)">
+                            {{validation.message}} </p>
+                    </div>
+                </div>
+
+                <div class="block-search">
+                    <label class="control-label">
+                        Description
+                    </label>
+                    <input pInputText formControlName="md_des" name="md_des"
+                        [attr.readonly]="paramAction?.action === 'view' ? 'readonly' : null"
+                        pTooltip="{{formDetail.value['md_des']}}" class="form-control" />
+                </div>
+
+                <div class="block-search" *ngIf="paramAction?.action">
+                    <label class="control-label">
+                        Status
+                        <span class="txt-required" *ngIf="paramAction?.action != 'view'">(*)</span>
+                    </label>
+                    <ng-select formControlName="sts_code" class="form-control" placeholder="Select"
+                        [ngClass]="{'is-readonly': paramAction?.action === 'view' }">
+                        <ng-option *ngFor="let item of statuses" [value]="item.code">
+                            {{item.code_value}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <!-- button -->
+        <div class="row pad">
+            <button pButton type="submit" class="btn-outline-info btn" [disabled]="formDetail.invalid" label="Save"
+                *ngIf="paramAction?.action != 'view'"></button>
+            <button pButton class="btn-outline-primary btn" label="Back To List"
+                [routerLink]="['/master-data/master-data-type']"></button>
+        </div>
+    </form>
+</div>

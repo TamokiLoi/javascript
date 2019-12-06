@@ -1,0 +1,47 @@
+// define button
+.btn {
+  height: 30px !important;
+  margin: 0 5px 0 0 !important;
+}
+
+.btn-outline-primary {
+  color: $color-primary !important;
+  border: 1px solid $color-primary !important;
+  background-color: $color-secondary !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-primary !important;
+    border: 1px solid $color-primary !important;
+    color: $color-secondary !important;
+  }
+}
+
+.btn-outline-info {
+  color: $color-info !important;
+  border: 1px solid $color-info !important;
+  background-color: $color-secondary !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-info !important;
+    border: 1px solid $color-info !important;
+    color: $color-secondary !important;
+  }
+}
+
+.btn-outline-danger {
+  color: $color-danger !important;
+  border: 1px solid $color-danger !important;
+  background-color: $color-secondary !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-danger !important;
+    border: 1px solid $color-danger !important;
+    color: $color-secondary !important;
+  }
+}

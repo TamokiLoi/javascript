@@ -1,0 +1,9 @@
+// define form with action view
+.disabled {
+    &.form-control:hover:enabled{
+        cursor: initial;
+        background-color: transparent !important;
+        text-align: left;
+    }
+    pointer-events: none;
+}
