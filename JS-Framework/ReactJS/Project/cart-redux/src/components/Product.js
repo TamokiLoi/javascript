@@ -41,10 +41,10 @@ class Product extends Component {
     showRating = (rating) => {
         var result = [];
         for (var i = 1; i <= rating; i++) {
-            result.push(<i className="fa fa-star"></i>);
+            result.push(<i className="fa fa-star" key={i}></i>);
         }
         for (var j = 1; j <= (5 - rating); j++) {
-            result.push(<i className="fa fa-star-o"></i>);
+            result.push(<i className="fa fa-star-o" key={i + j}></i>);
         }
         return result;
     }
