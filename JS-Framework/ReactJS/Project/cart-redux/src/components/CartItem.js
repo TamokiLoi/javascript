@@ -3,15 +3,9 @@ import * as MESSAGE from '../store/constants/Message';
 
 class CartItem extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { quantity: 1 };
-    }
-
     render() {
         var someValidPath = null;
-        var { product } = this.props.cartItem;
-        var { quantity } = (this.props.cartItem.quantity > 0) ? this.props.cartItem : this.state.quantity;
+        var { product, quantity } = this.props.cartItem;
 
         return (
             <tr>
@@ -58,7 +52,6 @@ class CartItem extends Component {
 
     onUpdateQuantity = (product, quantity) => {
         if(quantity > 0) {
-            this.setState({quantity: quantity});
             this.props.onUpdateProductInCart(product, quantity);
             this.props.onChangeMessage(MESSAGE.MSG_UPDATE_PRODUCT_IN_CART_SUCCESS);
         }
