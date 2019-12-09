@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as MESSAGE from '../store/constants/Message';
 
 class Product extends Component {
     render() {
@@ -29,7 +30,7 @@ class Product extends Component {
                             <span className="right">
                                 <a className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Cart"
                                     href={someValidPath}
-                                    onClick={() => this.props.onAddToCart(product)}>
+                                    onClick={() => this.onAddToCart(product)}>
                                     <i className="fa fa-shopping-cart"></i>
                                 </a>
                             </span>
@@ -38,6 +39,11 @@ class Product extends Component {
                 </div>
             </div>
         );
+    }
+
+    onAddToCart = (product) => {
+        this.props.onAddToCart(product);
+        this.props.onChangeMessage(MESSAGE.MSG_ADD_TO_CART_SUCCESS);
     }
 
     showRating = (rating) => {

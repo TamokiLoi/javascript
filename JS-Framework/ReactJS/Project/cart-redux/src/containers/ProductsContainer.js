@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Products from '../components/Products';
 import Product from '../components/Product';
 import PropTypes from 'prop-types';
+import { addToCart, changeMessage } from '../store/actions/index';
 import { connect } from 'react-redux';
-import { addToCart } from '../store/actions/index';
 
 class ProductsContainer extends Component {
 
@@ -18,13 +18,14 @@ class ProductsContainer extends Component {
 
     showProducts = (products) => {
         var result = null
-        var { onAddToCart } = this.props
+        var { onAddToCart, onChangeMessage } = this.props
         if (products.length > 0) {
             result = products.map((product, index) => {
                 return <Product
                     key={index}
                     product={product}
                     onAddToCart={onAddToCart}
+                    onChangeMessage={onChangeMessage}
                 />
             });
         }
@@ -44,7 +45,8 @@ ProductsContainer.propTypes = {
             inventory: PropTypes.number.isRequired,
             rating: PropTypes.number.isRequired
         })
-    ).isRequired
+    ).isRequired,
+    onChangeMessage: PropTypes.func.isRequired
 };
 
 
@@ -57,6 +59,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onAddToCart: (product) => { dispatch(addToCart(product, 1)) },
+        onChangeMessage: (message) => { dispatch(changeMessage(message)) },
     }
 }
 

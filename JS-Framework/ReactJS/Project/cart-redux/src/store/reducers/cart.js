@@ -4,20 +4,36 @@ var data = JSON.parse(localStorage.getItem('cart'));
 var initialState = data ? data : [];
 
 const cart = (state = initialState, action) => {
+    var index = -1;
+    var { product, quantity } = action;
+    index = findProductInCart(state, action.product);
     switch (action.type) {
         case TYPE.ADD_TO_CART:
-            saveCart(state, action);
+            if (index !== -1)
+                state[index].quantity += quantity;
+            else
+                state.push({
+                    product,
+                    quantity,
+                })
+            saveToLocalStorage(state);
             return [...state];
-        case TYPE.UPDATE_CART:
-            console.log(action)
-            saveCart(state, action);
+        case TYPE.UPDATE_PRODUCT_IN_CART:
+            if (index !== -1)
+                state[index].quantity = quantity;
+            saveToLocalStorage(state);
+            return [...state];
+        case TYPE.DELETE_PRODUCT_IN_CART:
+            if (index !== -1)
+                state = state.filter(item => item.product.id !== action.product.id);
+            saveToLocalStorage(state);
             return [...state];
         default:
             return [...state];
     }
 }
 
-var findProductInCart = (cart, product) => {
+var findProductInCart = (cart, product = {}) => {
     var index = -1;
     if (cart.length > 0) {
         for (var i = 0; i < cart.length; i++) {
@@ -30,18 +46,7 @@ var findProductInCart = (cart, product) => {
     return index;
 }
 
-var saveCart = (cart, action) => {
-    var { product, quantity } = action;
-    var index = -1;
-    index = findProductInCart(cart, product);
-    if (index !== -1) {
-        cart[index].quantity += quantity;
-    } else {
-        cart.push({
-            product,
-            quantity,
-        })
-    }
+var saveToLocalStorage = (cart) => {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 

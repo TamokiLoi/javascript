@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import * as MESSAGE from '../store/constants/Message';
 
 class CartItem extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { quantity: 1 };
+    }
+
     render() {
         var someValidPath = null;
-        var { product, quantity } = this.props.cartItem;
+        var { product } = this.props.cartItem;
+        var { quantity } = (this.props.cartItem.quantity > 0) ? this.props.cartItem : this.state.quantity;
 
         return (
             <tr>
@@ -21,22 +28,45 @@ class CartItem extends Component {
                     <span className="qty">{quantity} </span>
                     <div className="btn-group radio-group" data-toggle="buttons">
                         <label className="btn btn-sm btn-primary
-                            btn-rounded waves-effect waves-light">
-                            <a href={someValidPath} onClick={() => this.props.onUpdateCart(product, -1)}>—</a>
+                            btn-rounded waves-effect waves-light"
+                            onClick={() => this.onUpdateQuantity(product, quantity - 1)}
+                            >
+                            <a href={someValidPath}>—</a>
                         </label>
                         <label className="btn btn-sm btn-primary
-                            btn-rounded waves-effect waves-light">
-                            <a href={someValidPath} onClick={() => this.props.onUpdateCart(product, 1)}>+</a>
+                            btn-rounded waves-effect waves-light"
+                            onClick={() => this.onUpdateQuantity(product, quantity + 1)}
+                            >
+                            <a href={someValidPath}>+</a>
                         </label>
                     </div>
                 </td>
                 <td>{this.showSubTotal(product.price, quantity)}$</td>
                 <td>
-                    <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top"
-                        title="" data-original-title="Remove item">X</button>
+                    <button 
+                        type="button" 
+                        className="btn btn-sm btn-primary waves-effect waves-light" 
+                        data-toggle="tooltip" data-placement="top"
+                        title="" 
+                        data-original-title="Remove item"
+                        onClick={() => this.onDeleteProductInCart(product)}
+                        >X</button>
                 </td>
             </tr>
         );
+    }
+
+    onUpdateQuantity = (product, quantity) => {
+        if(quantity > 0) {
+            this.setState({quantity: quantity});
+            this.props.onUpdateProductInCart(product, quantity);
+            this.props.onChangeMessage(MESSAGE.MSG_UPDATE_PRODUCT_IN_CART_SUCCESS);
+        }
+    }
+
+    onDeleteProductInCart = (product) => {
+        this.props.onDeleteProductInCart(product);
+        this.props.onChangeMessage(MESSAGE.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
     }
 
     showSubTotal = (price, quantity) => {
