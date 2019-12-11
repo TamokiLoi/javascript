@@ -6,6 +6,20 @@
       "name": "Iphone X",
       "price": 500,
       "status": true
+    },
+    {
+      "id": 2,
+      "name": "Samsung XX",
+      "code": "SAM",
+      "price": "500",
+      "status": true
+    },
+    {
+      "id": 4,
+      "name": "222",
+      "code": "222",
+      "price": "222",
+      "status": true
     }
   ]
 }
