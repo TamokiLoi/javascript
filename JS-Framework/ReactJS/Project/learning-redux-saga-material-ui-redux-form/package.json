@@ -48,7 +48,7 @@
   },
   "lint-staged": {
       "src/**/*.{js,css}": [
-          "eslint src",
+          "npm run linting",
           "npm run format",
           "git add"
       ]
