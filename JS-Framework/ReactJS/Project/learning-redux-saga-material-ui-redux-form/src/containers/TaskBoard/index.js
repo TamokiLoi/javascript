@@ -43,9 +43,7 @@ class TaskBoard extends Component {
 	renderForm() {
 		let xhtml = null;
 		const { open } = this.state;
-		xhtml = (
-			<TaskForm open={open} onCloseForm={() => this.onToggleForm()} />
-		);
+		xhtml = <TaskForm open={open} onCloseForm={() => this.onToggleForm()} />;
 		return xhtml;
 	}
 
@@ -57,9 +55,7 @@ class TaskBoard extends Component {
 					return (
 						<TaskList
 							key={status.value}
-							tasks={listTask.filter(
-								task => task.status === status.value,
-							)}
+							tasks={listTask.filter(task => task.status === status.value)}
 							status={status}
 						/>
 					);

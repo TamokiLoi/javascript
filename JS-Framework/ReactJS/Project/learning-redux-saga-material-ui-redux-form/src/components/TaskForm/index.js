@@ -14,11 +14,7 @@ class TaskForm extends Component {
 		const { open, classes, onCloseForm } = this.props;
 
 		return (
-			<Dialog
-				open={open}
-				onClose={onCloseForm}
-				aria-labelledby="form-dialog-title"
-			>
+			<Dialog open={open} onClose={onCloseForm} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Add New Task</DialogTitle>
 				<DialogContent>
 					<TextField
