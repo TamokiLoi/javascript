@@ -4,36 +4,24 @@ import Icon from '@material-ui/core/Icon';
 import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { STATUSES } from '../../common/constants';
 import TaskForm from '../../components/TaskForm';
 import TaskList from '../../components/TaskList';
+import * as taskActions from '../../redux/actions/task';
 import style from './style';
-
-const listTask = [
-	{
-		id: 1,
-		title: 'Read book',
-		description: 'read material ui book',
-		status: 0,
-	},
-	{
-		id: 2,
-		title: 'Play game',
-		description: 'play game LOL',
-		status: 1,
-	},
-	{
-		id: 3,
-		title: 'Play with family',
-		description: 'play with family in house',
-		status: 2,
-	},
-];
 
 class TaskBoard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { open: false };
+	}
+
+	componentDidMount() {
+		const { taskActionCreators } = this.props;
+		const { fetchListTaskRequest } = taskActionCreators;
+		fetchListTaskRequest();
 	}
 
 	onToggleForm = (value = false) => {
@@ -48,6 +36,7 @@ class TaskBoard extends Component {
 	}
 
 	renderBoard() {
+		const { listTask } = this.props;
 		let xhtml = null;
 		xhtml = (
 			<Grid container spacing={2}>
@@ -55,7 +44,7 @@ class TaskBoard extends Component {
 					return (
 						<TaskList
 							key={status.value}
-							tasks={listTask.filter(task => task.status === status.value)}
+							tasks={listTask.filter(item => item.status === status.value)}
 							status={status}
 						/>
 					);
@@ -86,6 +75,22 @@ class TaskBoard extends Component {
 
 TaskBoard.propTypes = {
 	classes: PropTypes.object,
+	taskActionCreators: PropTypes.shape({
+		fetchListTaskRequest: PropTypes.func,
+	}),
+	listTask: PropTypes.array,
 };
 
-export default withStyles(style)(TaskBoard);
+const mapStateToProps = state => {
+	return {
+		listTask: state.task.listTask,
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		taskActionCreators: bindActionCreators(taskActions, dispatch),
+	};
+};
+
+export default withStyles(style)(connect(mapStateToProps, mapDispatchToProps)(TaskBoard));

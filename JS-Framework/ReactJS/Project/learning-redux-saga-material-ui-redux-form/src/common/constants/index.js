@@ -1,4 +1,4 @@
-export const API_ENDPOINT = 'http://localhost:3000/task';
+export const API_ENDPOINT = 'http://localhost:3000';
 
 export const STATUSES = [
 	{ value: 0, label: 'READY' },
