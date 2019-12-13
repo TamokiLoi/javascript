@@ -5,3 +5,9 @@ export const STATUSES = [
 	{ value: 1, label: 'IN PROGESS' },
 	{ value: 2, label: 'COMPLETED' },
 ];
+
+export const STATUS_CODE = {
+	SUCCESS: 200,
+	CREATED: 201,
+	UPDATED: 202,
+};
