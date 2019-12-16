@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import theme from '../../common/theme';
 import GlobalLoading from '../../components/GlobalLoading';
+import Modal from '../../components/Modal';
 import configureStore from '../../redux/configureStore';
 import TaskBoard from '../TaskBoard';
 import styles from './style';
@@ -19,6 +20,7 @@ class App extends Component {
 				<ThemeProvider theme={theme}>
 					<ToastContainer />
 					<GlobalLoading />
+					<Modal />
 					<TaskBoard />
 				</ThemeProvider>
 			</Provider>

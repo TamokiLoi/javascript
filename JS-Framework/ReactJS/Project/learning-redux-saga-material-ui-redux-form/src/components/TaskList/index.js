@@ -27,6 +27,8 @@ class TaskList extends Component {
 
 TaskList.propTypes = {
 	classes: PropTypes.object,
+	tasks: PropTypes.array,
+	status: PropTypes.object,
 };
 
 export default withStyles(style)(TaskList);

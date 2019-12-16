@@ -42,6 +42,8 @@ class TaskItem extends Component {
 
 TaskItem.propTypes = {
 	classes: PropTypes.object,
+	task: PropTypes.object,
+	status: PropTypes.object,
 };
 
 export default withStyles(style)(TaskItem);

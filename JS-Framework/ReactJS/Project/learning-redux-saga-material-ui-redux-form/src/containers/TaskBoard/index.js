@@ -7,33 +7,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { STATUSES } from '../../common/constants';
-import TaskForm from '../../components/TaskForm';
+import TaskForm from '../TaskForm';
 import TaskList from '../../components/TaskList';
 import * as taskActions from '../../redux/actions/task';
+import * as modalActions from '../../redux/actions/modal';
 import style from './style';
+import SearchBox from '../../components/SearchBox';
 
 class TaskBoard extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { open: false };
-	}
-
 	componentDidMount() {
 		const { taskActionCreators } = this.props;
 		const { fetchListTask } = taskActionCreators;
 		fetchListTask();
 	}
 
-	onToggleForm = (value = false) => {
-		this.setState({ open: value });
+	showForm = () => {
+		const { modalActionCreators } = this.props;
+		const { showModal, changeModalTitle, changeModalContent } = modalActionCreators;
+		showModal();
+		changeModalTitle('Add New Task');
+		changeModalContent(<TaskForm />);
 	};
 
-	renderForm() {
+	renderSearchBox = () => {
 		let xhtml = null;
-		const { open } = this.state;
-		xhtml = <TaskForm open={open} onCloseForm={() => this.onToggleForm()} />;
+		xhtml = <SearchBox handleFilter={this.handleFilter} />;
 		return xhtml;
-	}
+	};
+
+	handleFilter = event => {
+		const { taskActionCreators } = this.props;
+		const { filterTask } = taskActionCreators;
+		filterTask(event.target.value);
+	};
 
 	renderBoard() {
 		const { listTask } = this.props;
@@ -62,12 +68,12 @@ class TaskBoard extends Component {
 					variant="contained"
 					color="primary"
 					className={classes.button}
-					onClick={() => this.onToggleForm(true)}
+					onClick={this.showForm}
 				>
 					<Icon>add_icon</Icon> Add New Task
 				</Button>
+				{this.renderSearchBox()}
 				{this.renderBoard()}
-				{this.renderForm()}
 			</div>
 		);
 	}
@@ -77,20 +83,21 @@ TaskBoard.propTypes = {
 	classes: PropTypes.object,
 	taskActionCreators: PropTypes.shape({
 		fetchListTask: PropTypes.func,
+		filterTask: PropTypes.func,
+	}),
+	modalActionCreators: PropTypes.shape({
+		showModal: PropTypes.func,
+		changeModalTitle: PropTypes.func,
+		changeModalContent: PropTypes.func,
 	}),
 	listTask: PropTypes.array,
 };
 
-const mapStateToProps = state => {
-	return {
-		listTask: state.task.listTask,
-	};
-};
+const mapStateToProps = state => ({ listTask: state.task.listTask });
 
-const mapDispatchToProps = dispatch => {
-	return {
-		taskActionCreators: bindActionCreators(taskActions, dispatch),
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	taskActionCreators: bindActionCreators(taskActions, dispatch),
+	modalActionCreators: bindActionCreators(modalActions, dispatch),
+});
 
 export default withStyles(style)(connect(mapStateToProps, mapDispatchToProps)(TaskBoard));

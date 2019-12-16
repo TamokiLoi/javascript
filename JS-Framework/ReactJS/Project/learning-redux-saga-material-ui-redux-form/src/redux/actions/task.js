@@ -1,28 +1,18 @@
-// import * as taskApis from '../../apis/task';
-import * as taskTypes from '../../common/constants/task';
+import * as TYPES from '../../common/constants/task';
 
-export const fetchListTask = () => {
-	return { type: taskTypes.FETCH_TASK };
-};
+// load data
+export const fetchListTask = () => ({ type: TYPES.FETCH_TASK });
+export const fetchListTaskSuccess = data => ({ type: TYPES.FETCH_TASK_SUCCESS, payload: { data } });
+export const fetchListTaskFailed = error => ({ type: TYPES.FETCH_TASK_FAILED, payload: { error } });
 
-export const fetchListTaskSuccess = data => {
-	return { type: taskTypes.FETCH_TASK_SUCCESS, payload: { data } };
-};
+// filter & search
+export const filterTask = keyword => ({ type: TYPES.FILTER_TASK, payload: { keyword } });
+export const filterTaskSuccess = data => ({ type: TYPES.FILTER_TASK_SUCCESS, payload: { data } });
 
-export const fetchListTaskFailed = error => {
-	return { type: taskTypes.FETCH_TASK_FAILED, payload: { error } };
-};
-
-// export const fetchListTaskRequest = () => {
-// 	return dispatch => {
-// 		dispatch(fetchListTask());
-// 		taskApis
-// 			.getList()
-// 			.then(res => {
-// 				dispatch(fetchListTaskSuccess(res.data));
-// 			})
-// 			.catch(err => {
-// 				dispatch(fetchListTaskFailed(err));
-// 			});
-// 	};
-// };
+// add task
+export const addTask = (title, description) => ({
+	type: TYPES.ADD_TASK,
+	payload: { title, description },
+});
+export const addTaskSuccess = data => ({ type: TYPES.ADD_TASK_SUCCESS, payload: { data } });
+export const addTaskFailed = error => ({ type: TYPES.ADD_TASK_FAILED, payload: { error } });
