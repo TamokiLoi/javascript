@@ -16,9 +16,10 @@ module.exports = {
 	rules: {
 		'react/prop-types': 1,
 		'linebreak-style': 0,
+		'no-case-declarations': 0,
+		'no-shadow': 0,
 		'import/no-extraneous-dependencies': 0,
 		'class-methods-use-this': 0,
-		indent: 0,
 		'padded-blocks': 0,
 		'arrow-body-style': 0,
 		'arrow-parens': 0,

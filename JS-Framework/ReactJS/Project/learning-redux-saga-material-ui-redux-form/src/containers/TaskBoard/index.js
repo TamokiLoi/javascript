@@ -1,18 +1,16 @@
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
+import { Box, Button, Grid, Icon } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { STATUSES } from '../../common/constants';
-import TaskForm from '../TaskForm';
-import TaskList from '../../components/TaskList';
-import * as taskActions from '../../redux/actions/task';
-import * as modalActions from '../../redux/actions/modal';
-import style from './style';
 import SearchBox from '../../components/SearchBox';
+import TaskList from '../../components/TaskList';
+import * as modalActions from '../../redux/actions/modal';
+import * as taskActions from '../../redux/actions/task';
+import TaskForm from '../TaskForm';
+import style from './style';
 
 class TaskBoard extends Component {
 	componentDidMount() {
@@ -21,12 +19,51 @@ class TaskBoard extends Component {
 		fetchListTask();
 	}
 
-	showForm = () => {
-		const { modalActionCreators } = this.props;
+	handleShowForm = (task = null, type = false) => {
+		const { modalActionCreators, taskActionCreators, classes } = this.props;
 		const { showModal, changeModalTitle, changeModalContent } = modalActionCreators;
+		const { setTaskEditing } = taskActionCreators;
+		const { hideModal } = modalActionCreators;
 		showModal();
-		changeModalTitle('Add New Task');
-		changeModalContent(<TaskForm />);
+		setTaskEditing(task);
+		let title = 'Add New Task';
+		switch (type) {
+			case true:
+				title = 'Delete Task';
+				changeModalTitle(title);
+				changeModalContent(
+					<div className={classes.modalDelete}>
+						<div className={classes.modalConfirmText}>
+							Are you sure you want to delete item
+							<span className={classes.modalConfirmTextBold}> {task.title}</span>?
+						</div>
+						<Box display="flex" flexDirection="row-reverse" mt={2}>
+							<Box ml={1}>
+								<Button variant="contained" onClick={hideModal}>
+									No
+								</Button>
+							</Box>
+							<Box>
+								<Button
+									variant="contained"
+									color="primary"
+									onClick={() => this.handleDeleteTask(task.id)}
+								>
+									Yes
+								</Button>
+							</Box>
+						</Box>
+					</div>,
+				);
+				break;
+			case false:
+				if (task) title = 'Edit Task';
+				changeModalTitle(title);
+				changeModalContent(<TaskForm />);
+				break;
+			default:
+				break;
+		}
 	};
 
 	renderSearchBox = () => {
@@ -41,6 +78,20 @@ class TaskBoard extends Component {
 		filterTask(event.target.value);
 	};
 
+	handleEditTask = task => {
+		this.handleShowForm(task);
+	};
+
+	showModalDeleteTask = task => {
+		this.handleShowForm(task, true);
+	};
+
+	handleDeleteTask = id => {
+		const { taskActionCreators } = this.props;
+		const { deleteTask } = taskActionCreators;
+		deleteTask(id);
+	};
+
 	renderBoard() {
 		const { listTask } = this.props;
 		let xhtml = null;
@@ -52,6 +103,8 @@ class TaskBoard extends Component {
 							key={status.value}
 							tasks={listTask.filter(item => item.status === status.value)}
 							status={status}
+							onEdit={this.handleEditTask}
+							onDelete={this.showModalDeleteTask}
 						/>
 					);
 				})}
@@ -62,13 +115,14 @@ class TaskBoard extends Component {
 
 	render() {
 		const { classes } = this.props;
+
 		return (
 			<div className={classes.taskBoard}>
 				<Button
 					variant="contained"
 					color="primary"
 					className={classes.button}
-					onClick={this.showForm}
+					onClick={() => this.handleShowForm()}
 				>
 					<Icon>add_icon</Icon> Add New Task
 				</Button>
@@ -84,9 +138,12 @@ TaskBoard.propTypes = {
 	taskActionCreators: PropTypes.shape({
 		fetchListTask: PropTypes.func,
 		filterTask: PropTypes.func,
+		setTaskEditing: PropTypes.func,
+		deleteTask: PropTypes.func,
 	}),
 	modalActionCreators: PropTypes.shape({
 		showModal: PropTypes.func,
+		hideModal: PropTypes.func,
 		changeModalTitle: PropTypes.func,
 		changeModalContent: PropTypes.func,
 	}),

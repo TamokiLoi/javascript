@@ -12,26 +12,38 @@ import style from './style';
 
 class TaskItem extends Component {
 	render() {
-		const { classes, task, status } = this.props;
+		const { classes, task, status, onEdit, onDelete } = this.props;
 
 		return (
 			<Card key={task.id} className={classes.card}>
 				<CardContent>
 					<Grid container justify="space-between">
 						<Grid item md={8}>
-							<Typography component="h2">{task.title}</Typography>
+							<Typography component="h2" variant="h4" gutterBottom>
+								{task.title}
+							</Typography>
 						</Grid>
-						<Grid item md={4}>
+						<Grid item md={4} className={classes.textRight}>
 							{status.label}
 						</Grid>
 					</Grid>
 					<p>{task.description}</p>
 				</CardContent>
 				<CardActions className={classes.cardActions}>
-					<Fab color="primary" aria-label="edit" size="small">
+					<Fab
+						color="primary"
+						aria-label="edit"
+						size="small"
+						onClick={() => onEdit(task)}
+					>
 						<Icon fontSize="small">edit_icon</Icon>
 					</Fab>
-					<Fab color="secondary" aria-label="delete" size="small">
+					<Fab
+						color="secondary"
+						aria-label="delete"
+						size="small"
+						onClick={() => onDelete(task)}
+					>
 						<Icon fontSize="small">delete_forever_icon</Icon>
 					</Fab>
 				</CardActions>
@@ -44,6 +56,8 @@ TaskItem.propTypes = {
 	classes: PropTypes.object,
 	task: PropTypes.object,
 	status: PropTypes.object,
+	onEdit: PropTypes.func,
+	onDelete: PropTypes.func,
 };
 
 export default withStyles(style)(TaskItem);

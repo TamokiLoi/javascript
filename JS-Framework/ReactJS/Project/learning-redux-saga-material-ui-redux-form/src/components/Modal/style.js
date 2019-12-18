@@ -20,6 +20,7 @@ const styles = theme => ({
 		color: theme.color.textColor,
 		fontWeight: 700,
 		textTransform: 'capitalize',
+		lineHeight: '24px',
 	},
 	icon: {
 		cursor: 'pointer',

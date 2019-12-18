@@ -1,10 +1,12 @@
-import { Box, Button, Grid } from '@material-ui/core';
+import { Box, Button, Grid, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
+import { STATUSES } from '../../common/constants/index';
+import renderSelectField from '../../components/FormHelper/SelectField';
 import renderTextField from '../../components/FormHelper/TextField';
 import * as modalActions from '../../redux/actions/modal';
 import * as taskActions from '../../redux/actions/task';
@@ -13,11 +15,34 @@ import validate from './validate';
 
 class TaskForm extends Component {
 	handleSubmitForm = data => {
-		const { taskActionCreators } = this.props;
-		const { addTask } = taskActionCreators;
-		const { title, description } = data;
-		addTask(title, description);
+		const { taskActionCreators, taskEditing } = this.props;
+		const { addTask, updateTask } = taskActionCreators;
+		const { title, description, status } = data;
+		if (taskEditing && taskEditing.id) {
+			updateTask(title, description, status);
+		} else {
+			addTask(title, description);
+		}
 	};
+
+	renderStatusSelection() {
+		let xhtml = null;
+		const { taskEditing } = this.props;
+		if (taskEditing && taskEditing.id) {
+			xhtml = (
+				<Field id="status" name="status" label="Status" component={renderSelectField}>
+					{STATUSES.map(status => {
+						return (
+							<MenuItem key={status.value} value={status.value}>
+								{status.label}
+							</MenuItem>
+						);
+					})}
+				</Field>
+			);
+		}
+		return xhtml;
+	}
 
 	render() {
 		const { classes, handleSubmit, invalid, submitting, modalActionCreators } = this.props;
@@ -48,8 +73,16 @@ class TaskForm extends Component {
 							component={renderTextField}
 						/>
 					</Grid>
+					<Grid item md={12} className={classes.mt10}>
+						{this.renderStatusSelection()}
+					</Grid>
 					<Grid item md={12}>
 						<Box display="flex" flexDirection="row-reverse" mt={2}>
+							<Box ml={1}>
+								<Button variant="contained" onClick={hideModal}>
+									Cancel
+								</Button>
+							</Box>
 							<Box>
 								<Button
 									variant="contained"
@@ -58,11 +91,6 @@ class TaskForm extends Component {
 									disabled={invalid || submitting}
 								>
 									Save
-								</Button>
-							</Box>
-							<Box mr={1}>
-								<Button variant="contained" onClick={hideModal}>
-									Cancel
 								</Button>
 							</Box>
 						</Box>
@@ -78,16 +106,22 @@ TaskForm.propTypes = {
 	handleSubmit: PropTypes.func,
 	invalid: PropTypes.bool,
 	submitting: PropTypes.bool,
+	taskEditing: PropTypes.object,
 	modalActionCreators: PropTypes.shape({ hideModal: PropTypes.func }),
-	taskActionCreators: PropTypes.shape({ addTask: PropTypes.func }),
+	taskActionCreators: PropTypes.shape({ addTask: PropTypes.func, updateTask: PropTypes.func }),
 };
+
+const mapStateToProps = state => ({
+	taskEditing: state.task.taskEditing,
+	initialValues: state.task.taskEditing,
+});
 
 const mapDispatchToProps = dispatch => ({
 	modalActionCreators: bindActionCreators(modalActions, dispatch),
 	taskActionCreators: bindActionCreators(taskActions, dispatch),
 });
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const FORM_NAME = 'TASK_MANAGEMENT';
 const withReduxForm = reduxForm({ form: FORM_NAME, validate });
