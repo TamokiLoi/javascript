@@ -1,7 +1,6 @@
 const styles = () => ({
-	container: {},
-	textField: {
-		width: '32.5%',
+	children: {
+		padding: '10px',
 	},
 });
 
