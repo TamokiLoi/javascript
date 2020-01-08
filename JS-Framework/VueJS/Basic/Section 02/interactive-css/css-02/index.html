@@ -16,7 +16,7 @@
             margin: 10px;
         }
 
-        .bg-red {
+        /* .bg-red {
             background-color: red;
         }
 
@@ -26,39 +26,52 @@
 
         .bg-green {
             background-color: green;
-        }
+        } */
     </style>
 </head>
 
 <body>
     <div id="app">
-        <div class="square" @click="handleRed = !handleRed" :class="{'bg-red': handleRed}"></div>
+        <!-- <div class="square" @click="handleRed = !handleRed" :class="{'bg-red': handleRed}"></div>
         <div class="square" :class="{'bg-red': handleRed}"></div>
-        <div class="square" :class="[color, {'bg-red': handleRed}]"></div>
+        <div class="square" :class="[color, {'bg-red': handleRed}]"></div> -->
+
+        <div class="square" :style="{backgroundColor: color}"></div>
+        <div class="square" :style="customStyles"></div>
+        <div class="square" :style="[customStyles, {height: width + 'px'}]"></div>
         <hr>
-        <input v-model="color" type="text" />
+        <input type="text" v-model="color" />
+        <input type="text" v-model="width" />
     </div>
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                handleRed: false,
-                color: 'bg-green'
+                // handleRed: false,
+                // color: 'bg-green',
+                color: 'gray',
+                width: 100,
             },
             watch: {
 
             },
             computed: {
-                divClasses: function() {
-                    // return {
-                    //     'bg-red': this.handleRed,
-                    //     'bg-green': !this.handleRed
-                    // }
+                // divClasses: function() {
+                //     return {
+                //         'bg-red': this.handleRed,
+                //         'bg-green': !this.handleRed
+                //     }
+                // },
+                customStyles: function () {
+                    return {
+                        backgroundColor: this.color,
+                        width: this.width + 'px',
+                    }
                 }
             },
             methods: {
-      
+
             }
         });
     </script>
