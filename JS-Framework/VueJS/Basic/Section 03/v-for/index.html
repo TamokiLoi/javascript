@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- getting the current index -->
+        <ul>
+            <li v-for="(menu, i) in menus" :key="i">{{ menu }} with index: {{i}}</li>
+        </ul>
+        <!-- keep track -->
+        <button @click="menus.push('text')">Add new item menu</button>
+
+        <!-- <hr>
+        <ul>
+            <li v-for="student in students">
+                <div v-for="(value, key, index) in student">{{key}}: {{value}} ({{index}})</div>
+            </li>
+        </ul>
+        <hr> -->
+
+        <!-- looping through a list of numbers -->
+        <!-- <div v-for="n in 10">{{n}}</div> -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                menus: ['Home', 'About', 'Blog', 'Contact', 'FAQ'],
+                // students: [
+                //     {name: 'Sky', age: 30, class: 'CNTT'},
+                //     {name: 'Albert', age: 32, class: 'QTKD'},
+                //     {name: 'John', age: 10, class: 'CDT'}
+                // ]
+            },
+            watch: {
+
+            },
+            computed: {
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>

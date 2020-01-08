@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- condition -->
+        <p>You're doctor?</p>
+        <p v-if="isDoctor">Yes, I am <span>a doctor.</span></p>
+        <p v-else>No, I am a teacher.</p>
+        <button @click="isDoctor = !isDoctor">Change condition</button>
+
+        <!-- alternative -->
+        <template v-if="isDoctor">
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+        </template>
+
+        <!-- v-show -->
+        <p v-show="isDoctor">Test show element</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isDoctor: false
+            },
+            watch: {
+
+            },
+            computed: {
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+
+</body>
+
+</html>
