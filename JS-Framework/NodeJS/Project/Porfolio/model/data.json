@@ -14,7 +14,7 @@
         },
         {
             "id": 2,
-            "title": "Thiết kế logo",
+            "title": "Design Logo",
             "bigImage": "./images/p3.jpg",
             "productImage": ["./images/p3.jpg", "./images/p4.jpg"],
             "description": "description product 02",
@@ -22,11 +22,11 @@
             "role": "Designer",
             "category": "Branding",
             "link": "http://zing.vn",
-            "slug": "thiet-ke-logo"
+            "slug": "design-logo"
         },
         {
             "id": 3,
-            "title": "Thiết kế Banner",
+            "title": "Design Banner",
             "bigImage": "./images/p5.jpg",
             "productImage": ["./images/p5.jpg", "./images/p6.jpg"],
             "description": "description product 03",
@@ -34,19 +34,19 @@
             "role": "Artist",
             "category": "Backend",
             "link": "http://vnexpress.vn",
-            "slug": "thiet-ke-banner"
+            "slug": "design-banner"
         },
         {
             "id": 4,
-            "title": "Thiết kế chức năng cho Frontend",
+            "title": "Frontend Developer",
             "bigImage": "./images/p7.jpg",
             "productImage": ["./images/p7.jpg", "./images/p8.jpg"],
             "description": "description product 04",
             "client": "FPT",
-            "role": "Frontend Dev",
+            "role": "Frontend Developer",
             "category": "Frontend",
             "link": "http://thegioididong.com",
-            "slug": "thiet-ke-chuc-nang-cho-frontend"
+            "slug": "frontend-developer"
         }
     ]
 }

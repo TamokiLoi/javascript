@@ -32,19 +32,19 @@
                 <ul class="ish-sidebar-mdata post-meta">
                     <li class="ish-sidebar-mdata__item">
                         <strong class="ish-sidebar-mdata__title post-meta-key">Client</strong>
-                        IshYoBoy
+                        <%= productDetail.client %>
                     </li>
                     <li class="ish-sidebar-mdata__item">
-                        <strong class="ish-sidebar-mdata__title post-meta-key">Work Done</strong>
-                        Website, Logotype, Visual Identity
+                        <strong class="ish-sidebar-mdata__title post-meta-key">Role In Project</strong>
+                        <%= productDetail.role %>
                     </li>
                     <li class="ish-sidebar-mdata__item">
                         <strong class="ish-sidebar-mdata__title post-meta-key">Category</strong>
-                        <a href="#">Website</a>
+                        <%= productDetail.category %>
                     </li>
                     <li class="ish-sidebar-mdata__item">
-                        <strong class="ish-sidebar-mdata__title post-meta-key">Link</strong>
-                        <a href="https://ishyoboy.com" target="_blank">ishyoboy.com</a>
+                        <strong class="ish-sidebar-mdata__title post-meta-key">Link Product</strong>
+                        <a href="<%= productDetail.link %>" target="_blank"><%= productDetail.link %></a>
                     </li>
                 </ul>
 
@@ -86,19 +86,13 @@
 
             <div class="ish-col-xs-12 ish-col-sm-7 ish-col-sm-offset-1 ish-content__main">
 
-                <!-- main content -->
-                <a class="ish-image ish-lightbox" href="/images/pflo1.jpg">
-                    <img class="ish-image__image" src="/images/pflo1.jpg" alt="logotype design">
-                    <span class="ish-image__caption">Logotype Design</span>
+                <!-- image content -->
+                <% productDetail.productImage.forEach(function(image) { %>
+                <a class="ish-image ish-lightbox" href="<%= image %>">
+                    <img class="ish-image__image" src="<%= image %>" alt="logotype design">
                 </a>
-                <a class="ish-image ish-lightbox" href="/images/pflo2.jpg">
-                    <img class="ish-image__image" src="/images/pflo2.jpg" alt="our company">
-                </a>
-                <a class="ish-image ish-lightbox" href="/images/pflo3.jpg">
-                    <img class="ish-image__image" src="/images/pflo3.jpg" alt="brochure design">
-                    <span class="ish-image__caption">Brochure Design</span>
-                </a>
-                <!-- main content end -->
+                <% }) %>
+                <!-- image content end -->
 
             </div>
 
