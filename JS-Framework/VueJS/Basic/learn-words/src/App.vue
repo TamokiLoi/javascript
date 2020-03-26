@@ -1,32 +1,46 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <app-card card-words="cat">
-            <h2 slot="title">{{ cardTitle }}</h2>
-            <p>White cat is so noob!</p>
-          </app-card>
-        </div>
+  <div class="container">
+    <app-header :itemCount="items.length" :maxItem="maxItem"></app-header>
+    <app-new-item :items="items" @addItem="addItem"></app-new-item>
+    <app-items-layout :items="items" @removeItem="removeItem"></app-items-layout>
+    <div class="row mt-3">
+      <div class="col-sm-12 text-center">
+        <div class="alert alert-info">Info: Click on a Item to delete it!</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Card from "./components/Card";
+import Header from "./components/Header";
+import ItemsLayout from "./components/ItemsLayout";
+import NewItem from "./components/NewItem";
 
 export default {
   data() {
     return {
-      cardTitle: 'White cat'
-    }
+      items: [],
+      maxItem: 12
+    };
   },
   components: {
-    appCard: Card
+    appHeader: Header,
+    appItemsLayout: ItemsLayout,
+    appNewItem: NewItem
+  },
+  methods: {
+    addItem(item) {
+      if (this.items.length >= this.maxItem) {
+        return alert("Please remove item first!");
+      }
+      this.items.push(item);
+    },
+    removeItem(index) {
+      this.items.splice(index, 1);
+    }
   }
 };
 </script>
 
-<style scoped>
+<style>
 </style>
