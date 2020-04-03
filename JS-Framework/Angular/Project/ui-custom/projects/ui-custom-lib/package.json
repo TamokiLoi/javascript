@@ -1,0 +1,22 @@
+{
+  "name": "ui-custom-lib",
+  "version": "0.0.1",
+  "description": "This is a UI custom library based on Primeng library.",
+  "keywords": [
+    "Angular",
+    "Library",
+    "PrimeNG",
+    "UI"
+  ],  
+  "license": "update comming soon",
+  "repository": {
+    "type": "git",
+    "url": "update comming soon"
+  },
+  "author": "Tamoki",
+  "email": "loinguyenlamthanh@gmail.com",
+  "peerDependencies": {
+    "@angular/common": "^8.2.8",
+    "@angular/core": "^8.2.8"
+  }
+}
