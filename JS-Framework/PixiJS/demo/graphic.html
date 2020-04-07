@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="mycanvas"></canvas>
+    <script type="text/javascript">
+        const canvas = document.getElementById('mycanvas');
+
+        const app = new PIXI.Application({
+            view: canvas,
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+
+        let graphic = new PIXI.Graphics();
+        graphic.x = app.renderer.width/2;
+        graphic.y = app.renderer.height/2;
+        app.stage.addChild(graphic);
+
+        app.ticker.add(animate);
+
+        function animate() {
+
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- Include local copy of Pixi.js -->
+    <script src="pixi.min.js"></script>
+
+    <!-- or link to Pixi.js on CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.2/pixi.min.js"></script>
+
+    <!-- the rest of our PIXI.js code -->
+    <script>
+        // 1. Create a Pixi renderer and define size and a background color
+        var renderer = PIXI.autoDetectRenderer(800, 600, {
+
+            // create transparent canvas
+            transparent: true,
+
+            // change background color to blue
+            backgroundColor: '0x86D0F2',
+            border: '1px solid red'
+
+        });
+
+        // 2. Append canvas element to the body
+        document.body.appendChild(renderer.view);
+
+        // 3. Create a container that will hold your scene
+        var stage = new PIXI.Container();
+
+        var lines = [
+            [
+                [-8.154, 558.886],
+                [121.097, 294.348],
+                [133.744, 282.209],
+                [134.591, 281.512],
+                [166.995, 250.542], // duplicate 
+                [166.995, 250.542], // duplicate 
+                [167.029, 250.518],
+                [170.649, 248.128],
+                [172.666, 246.822],
+                [176.68, 244.274],
+                [176.68, 244.274],
+                [178.455, 243.17],
+                [292.488, -14.857]
+            ]
+        ]
+
+        lines.forEach((line) => {
+            console.log(line)
+            var graphics = new PIXI.Graphics();
+            graphics.lineStyle(4, 0xD5402B, 1);
+            graphics.position.x = renderer.width / 2;
+            graphics.position.y = renderer.height / 2;
+            // graphics.pivot.set(0, 0);
+            // graphics.rotation = 0.785398;
+            line.forEach((point, i) => {
+                if (i === 0) graphics.moveTo(point[0], point[1]);
+                else graphics.lineTo(point[0], point[1]);
+            })
+            graphics.endFill();
+            stage.addChild(graphics);
+        });
+
+
+        // add stage to the canvas
+        render();
+
+        function render() {
+            renderer.render(stage);
+        }
+    </script>
+</body>
+
+</html>
