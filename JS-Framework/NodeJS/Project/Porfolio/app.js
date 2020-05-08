@@ -3,11 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.set('port', process.env.PORT || 4000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +25,7 @@ app.use("/stylesheets", express.static(__dirname + "stylesheets"));
 app.use("/javascripts", express.static(__dirname + "javascripts"));
 
 app.use(session({
-    secret: 'fedu',
+    secret: 'tamoki',
     resave: false,
     saveUninitialized: true
 }))
@@ -47,5 +50,6 @@ app.use(function (err, req, res, next) {
 });
 
 app.locals.fakedata = require('./model/data.json');
+app.listen(app.get('port'));
 
 module.exports = app;

@@ -1,102 +1,134 @@
 <% include template/header %>
 
-        <% fakedata.products.forEach(function(productDetail) { %>
+<% fakedata.products.forEach(function(productDetail) { %>
 
-        <% if(productDetail.id == id) { %>
-        <!-- lead -->
-        <div class="ish-row ish-fullrow ish-lead">
-            <span class="ish-lead__caption ish-icon-up"><%= productDetail.title %></span>
-            <div class="ish-lead__image">
-                <img src="<%= productDetail.bigImage %>" alt="wawererly design">
-            </div>
-            <h1 class="ish-lead__headline">
-				<span class="ish-lead__headline-inner"><%= productDetail.title %></span>
-            </h1>
+<% if(productDetail.id == id) { %>
+<!-- lead -->
+<div class="ish-row ish-fullrow ish-lead">
+    <span class="ish-lead__caption ish-icon-up"><%= productDetail.title %></span>
+    <div class="ish-lead__image">
+        <img src="<%= productDetail.bigImage %>" alt="wawererly design">
+    </div>
+    <h1 class="ish-lead__headline">
+        <span class="ish-lead__headline-inner"><%= productDetail.title %></span>
+    </h1>
+</div>
+
+<!-- lead end -->
+
+<!-- content -->
+<div class="ish-row ish-content">
+
+    <div class="ish-col-xs-12 ish-col-sm-4 ish-last-xs ish-first-sm ish-content__sidebar">
+
+        <!-- side content -->
+        <p>
+            <%= productDetail.description %>
+        </p>
+        <p>
+            The word comes from the latin word illustra’tio, illu’stro meaning enlighten, irradiate.
+        </p>
+
+        <ul class="ish-sidebar-mdata post-meta">
+            <li class="ish-sidebar-mdata__item">
+                <strong class="ish-sidebar-mdata__title post-meta-key">Client</strong>
+                <%= productDetail.client %>
+            </li>
+            <li class="ish-sidebar-mdata__item">
+                <strong class="ish-sidebar-mdata__title post-meta-key">Role In Project</strong>
+                <%= productDetail.role %>
+            </li>
+            <li class="ish-sidebar-mdata__item">
+                <strong class="ish-sidebar-mdata__title post-meta-key">Category</strong>
+                <%= productDetail.category %>
+            </li>
+            <li class="ish-sidebar-mdata__item">
+                <strong class="ish-sidebar-mdata__title post-meta-key">Link Product</strong>
+                <a href="<%= productDetail.link %>" target="_blank"><%= productDetail.link %></a>
+            </li>
+        </ul>
+
+        <hr>
+
+        <div class="ish-sidebar-share">
+            <strong class="ish-sidebar-share__desc">Share</strong>
+            <ul class="ish-sidebar-share__list">
+                <li class="ish-sidebar-share__list-item">
+                    <a href="#"
+                        class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-facebook ish--tc3"></a>
+                </li>
+                <li class="ish-sidebar-share__list-item">
+                    <a href="#"
+                        class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-behance ish--tc3"></a>
+                </li>
+                <li class="ish-sidebar-share__list-item">
+                    <a href="#"
+                        class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-dribbble ish--tc3"></a>
+                </li>
+                <li class="ish-sidebar-share__list-item">
+                    <a href="#"
+                        class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-twitter ish--tc3"></a>
+                </li>
+            </ul>
         </div>
 
-        <!-- lead end -->
+        <hr>
 
-        <!-- content -->
-        <div class="ish-row ish-content">
+        <ul class="ish-prev-next">
+            <li class="ish-prev-next__item ish-prev-next--left">
+                <a class="ish-prev-next__link" href="portfolio-detail2.html">Previous</a>
+                <span class="ish-prev-next__icon ish-icon-left"></span>
+            </li>
+            <li class="ish-prev-next__item ish-prev-next--right">
+                <a class="ish-prev-next__link" href="portfolio-detail2.html">Next</a>
+                <span class="ish-prev-next__icon ish-icon-right"></span>
+            </li>
+        </ul>
+        <!-- side content end -->
 
-            <div class="ish-col-xs-12 ish-col-sm-4 ish-last-xs ish-first-sm ish-content__sidebar">
+    </div>
 
-                <!-- side content -->
-                <p>
-                    <%= productDetail.description %>
-                </p>
-                <p>
-                    The word comes from the latin word illustra’tio, illu’stro meaning enlighten, irradiate.
-                </p>
+    <div class="ish-col-xs-12 ish-col-sm-7 ish-col-sm-offset-1 ish-content__main">
 
-                <ul class="ish-sidebar-mdata post-meta">
-                    <li class="ish-sidebar-mdata__item">
-                        <strong class="ish-sidebar-mdata__title post-meta-key">Client</strong>
-                        <%= productDetail.client %>
-                    </li>
-                    <li class="ish-sidebar-mdata__item">
-                        <strong class="ish-sidebar-mdata__title post-meta-key">Role In Project</strong>
-                        <%= productDetail.role %>
-                    </li>
-                    <li class="ish-sidebar-mdata__item">
-                        <strong class="ish-sidebar-mdata__title post-meta-key">Category</strong>
-                        <%= productDetail.category %>
-                    </li>
-                    <li class="ish-sidebar-mdata__item">
-                        <strong class="ish-sidebar-mdata__title post-meta-key">Link Product</strong>
-                        <a href="<%= productDetail.link %>" target="_blank"><%= productDetail.link %></a>
-                    </li>
-                </ul>
+        <!-- image content -->
+        <% productDetail.productImage.forEach(function(image) { %>
+        <a class="ish-image ish-lightbox" href="<%= image %>">
+            <img class="ish-image__image" src="<%= image %>" alt="logotype design">
+        </a>
+        <% }) %>
+        <!-- image content end -->
 
-                <hr>
+    </div>
 
-                <div class="ish-sidebar-share">
-                    <strong class="ish-sidebar-share__desc">Share</strong>
-                    <ul class="ish-sidebar-share__list">
-                        <li class="ish-sidebar-share__list-item">
-                            <a href="#" class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-facebook ish--tc3"></a>
-                        </li>
-                        <li class="ish-sidebar-share__list-item">
-                            <a href="#" class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-behance ish--tc3"></a>
-                        </li>
-                        <li class="ish-sidebar-share__list-item">
-                            <a href="#" class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-dribbble ish--tc3"></a>
-                        </li>
-                        <li class="ish-sidebar-share__list-item">
-                            <a href="#" class="ish-sidebar-share__list-link ish-sc-el ish-sc-icon ish-icon-twitter ish--tc3"></a>
-                        </li>
-                    </ul>
-                </div>
+</div>
+<!-- content end -->
+<% }}) %>
 
-                <hr>
+<hr>
 
-                <ul class="ish-prev-next">
-                    <li class="ish-prev-next__item ish-prev-next--left">
-                        <a class="ish-prev-next__link" href="portfolio-detail2.html">Previous</a>
-                        <span class="ish-prev-next__icon ish-icon-left"></span>
-                    </li>
-                    <li class="ish-prev-next__item ish-prev-next--right">
-                        <a class="ish-prev-next__link" href="portfolio-detail2.html">Next</a>
-                        <span class="ish-prev-next__icon ish-icon-right"></span>
-                    </li>
-                </ul>
-                <!-- side content end -->
-
-            </div>
-
-            <div class="ish-col-xs-12 ish-col-sm-7 ish-col-sm-offset-1 ish-content__main">
-
-                <!-- image content -->
-                <% productDetail.productImage.forEach(function(image) { %>
-                <a class="ish-image ish-lightbox" href="<%= image %>">
-                    <img class="ish-image__image" src="<%= image %>" alt="logotype design">
-                </a>
-                <% }) %>
-                <!-- image content end -->
-
-            </div>
-
+<h3>Viewed Products</h3>
+<div class="ish-row ish-content ish-portfolio ish-macy" style="margin-top: 10px;">
+    <% if(listViewedProducts) { %>
+    <% listViewedProducts.forEach(function(idProductViewed) { %>
+    <% fakedata.products.forEach(function(product) {
+        if((product.id == idProductViewed) && (product.id != id)) {
+    %>
+    <a class="ish-portfolio-item ish--tc13 ish-portfolio-<%= product.category %>"
+        href="/<%= product.slug %>.<%= product.id %>">
+        <div class="ish-portfolio-item__image-container">
+            <img class="ish-portfolio-item__image" src="<%= product.bigImage %>" alt="business cards">
         </div>
-        <!-- content end -->
-        <% }}) %>
+        <div class="ish-portfolio-item__desc">
+            <span class="ish-portfolio-item__title"><%= product.title %></span>
+            <span class="ish-portfolio-item__subtitle"><%= product.category %></span>
+        </div>
+    </a>
+    <%
+        }
+        })
+        })
+        }
+    %>
+</div>
+
 <% include template/footer %>
