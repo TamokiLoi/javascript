@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+    <style>
+        /* Style the buttons that are used to open and close the accordion panel */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active,
+        .accordion:hover {
+            background-color: #ccc;
+        }
+
+        /* Style the accordion panel. Note: hidden by default */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .accordion:after {
+            /* Unicode character for "plus" sign (+) */
+            content: '\02795';
+            font-size: 13px;
+            color: #777;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            /* Unicode character for "minus" sign (-) */
+            content: "\2796";
+        }
+    </style>
+</head>
+
+<body>
+    <button class="accordion">Section 1</button>
+    <div class="panel">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio exercitationem pariatur blanditiis temporibus
+            nisi quibusdam. Dignissimos maiores minima neque esse ab cumque perspiciatis voluptates, rem debitis at aut
+            sint illo praesentium impedit? Necessitatibus, blanditiis? Aspernatur praesentium impedit facilis aut nemo
+            quae quidem, ducimus dolorem, error nostrum beatae nam, exercitationem magnam?</p>
+    </div>
+
+    <button class="accordion">Section 2</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo provident adipisci iste vel, tempora
+            doloremque, minus molestias amet facilis deleniti nemo aperiam nam eum consectetur! Nisi, rem. Voluptate,
+            perferendis odit. Tempore alias ipsam hic totam. Quia, magnam incidunt ipsum temporibus blanditiis veniam
+            reiciendis in dolor quisquam inventore iure, ex molestiae quae illo quis est consequuntur odit natus quo
+            consequatur quibusdam. Praesentium, ea fuga laudantium labore recusandae atque id repellat debitis
+            voluptatum optio ratione asperiores. Ipsa debitis temporibus necessitatibus tenetur mollitia facilis, soluta
+            quaerat maxime enim delectus rerum similique harum asperiores nisi nobis deleniti deserunt impedit
+            obcaecati! Molestiae non quisquam praesentium?</p>
+    </div>
+
+    <button class="accordion">Section 3</button>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus blanditiis nam voluptas magnam dicta
+            enim, possimus quibusdam sed, optio molestias corporis repudiandae eos commodi impedit nemo aperiam quos
+            pariatur id molestiae sit aspernatur fuga non atque. Modi ducimus amet quo quasi accusamus aperiam ipsum
+            libero distinctio voluptatum iusto nihil aspernatur illum enim ullam, fugit quas ratione repellendus
+            perferendis nemo, voluptatibus facere dolorem eligendi. Nobis excepturi dolore sapiente error, repudiandae,
+            incidunt delectus eos atque voluptatem voluptatum quidem dignissimos corrupti dolores dolorum? Minus
+            laudantium perferendis ipsum officia pariatur velit molestiae, aut omnis, iusto vero placeat perspiciatis
+            dignissimos quidem? Perferendis aspernatur quo minus non nulla laboriosam pariatur corrupti hic quos fuga
+            molestiae, maiores obcaecati expedita incidunt cumque harum voluptas qui, facere itaque, voluptate ullam
+            earum excepturi. Nam provident officia est ad dolores vel incidunt quam. Maxime, nostrum. Modi perspiciatis,
+            accusantium rerum, ullam consequatur tenetur culpa voluptatibus possimus quis, aut laudantium nobis illo
+            quasi reprehenderit corporis quam! Labore corrupti hic, blanditiis dignissimos fugit explicabo eum,
+            voluptatum tenetur molestias consequuntur ullam veritatis sint illum! Maxime ipsam molestias amet. Tempore
+            fugit accusantium repellat autem quam dolores corrupti minus optio! Sapiente, pariatur odit. Fugit at dolore
+            cum, eius sapiente aut magni similique rerum nulla reprehenderit dolorum tempora.</p>
+    </div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                /* Toggle between adding and removing the "active" class, to highlight the button that controls the panel */
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    console.log(panel.scrollHeight);
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

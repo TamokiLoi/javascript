@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs Content</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <!-- Tab links -->
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+    </div>
+
+    <!-- Tab contents -->
+    <div id="London" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+        <h3>London</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, laboriosam?</p>
+    </div>
+
+    <div id="Paris" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+        <h3>Paris</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, maxime?</p>
+    </div>
+
+    <div id="Tokyo" class="tabcontent">
+        <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+        <h3>Tokyo</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, ex!</p>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
