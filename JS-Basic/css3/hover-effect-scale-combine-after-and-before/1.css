@@ -1,0 +1,36 @@
+*{}
+
+.block{
+    width: 400px;
+    height: 300px;
+    position: relative;
+}
+.block img{
+    width: 400px;
+}
+.block:after, .block:before{
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 340px;
+    height: 260px;
+    border: 1px solid white;
+    transition: 0.4s;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    transform: scaleX(0);
+}
+.block:before{ 
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: white;
+    border-right-color: white;
+    transform: scaleY(0);
+}
+.block:hover:after{
+    transform: scaleX(1);
+}
+.block:hover:before{
+    transform: scaleY(1);
+}
