@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #48a3da;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+._5btn {
+    width: 1000px;
+    height: 100px;
+    border: 10px solid #48a3da;
+    margin: auto;
+    border-top: none;
+}
+
+._5btn li:hover {
+    background: #48a3da;
+    color: white;
+}
+
+._5btn ul {
+    width: 100%;
+}
+
+._5btn ul li {
+    width: 20%;
+    height: 100px;
+    float: left;
+    text-align: center;
+    line-height: 100px;
+    border-right: 10px solid #48a3da;
+    font-size: 30px;
+    font-family: segoe ui light;
+    list-style: none;
+    box-sizing: border-box;
+    transition: .4s;
+    cursor: pointer;
+    color: #48a3da;
+}
+
+._5btn ul li:last-child {
+    border: none;
+}
+
+.slide {
+    width: 100%;
+}
+
+.slide img {
+    width: 100%;
+}
+
+._5slides {
+    width: 1000px;
+    height: 400px;
+    overflow: hidden;
+    margin: auto;
+    border: 10px solid #48a3da;
+}
+
+._5slides ul {
+    width: 500%;
+    height: 100%;
+    transition: .5s;
+}
+
+._5slides ul li {
+    width: 20%;
+    float: left;
+    list-style: none;
+}
+
+._5btn li.active {
+    background: #48a3da;
+    color: white;
+}
+
+._5slides ul.slide0 {
+    transform: translateX(0px);
+}
+._5slides ul.slide1 {
+    transform: translateX(-1000px);
+}
+._5slides ul.slide2 {
+    transform: translateX(-2000px);
+}
+._5slides ul.slide3 {
+    transform: translateX(-3000px);
+}
+._5slides ul.slide4 {
+    transform: translateX(-4000px);
+}
