@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.menu{
+    width: 100%;
+    background: #183544;
+    transition: .4s;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.menu .menu-top{
+    height: 30px;
+    background: #11252f;
+    transition: .4s;
+}
+
+.menu .menu-mid{
+    height: 100px;
+    background: #183544;
+    border-bottom: 1px solid black;
+}
+
+.menu .menu-mid .logo{}
+.menu .menu-mid .logo img{
+    height: 70px;
+    padding: 15px;
+    transition: .4s;
+}
+.menu .menu-mid .search{}
+
+.menu .menu-bottom{
+    height: 30px;
+    background: #183544;
+    transition: .4s;
+}
+
+.content {
+    padding-top: 150px;
+    width: 400px;
+    margin: auto;
+    font-family: segoe ui light;
+    line-height: 22px;
+    color: #414141;
+}
+
+.scroll-top {
+    transform: translateY(-200px);
+}
+
+.all-categories {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    color: white;
+    font-family: segoe ui light;
+    transition: .4s;
+    opacity: 0;
+    visibility: hidden;
+    transition: translateY(100px);
+    cursor: pointer;
+    color: gray;
+}
+
+.all-categories:hover {
+    color: white;
+}
+
+.transform-menu .menu-top {
+    height: 0;
+    overflow: hidden;
+}
+
+.transform-menu .menu-bottom {
+    height: 0;
+    overflow: hidden;
+}
+
+.transform-menu .all-categories {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.all-categories .btn { }
+
+.menu .menu-bottom.show-sub-menu {
+    height: 30px;
+}
