@@ -37,6 +37,11 @@ export default {
       }
     }
   },
+  mounted() {
+    //   let a;
+      const a = this.$store.state.Result.result;
+      console.log(a);
+  },
   methods: {
     ...mapActions(["increment", "asyncDecrement"])
 

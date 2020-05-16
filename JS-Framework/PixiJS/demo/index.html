@@ -5,77 +5,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.3/pixi.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+            background: blue;
+        }
+    </style>
 </head>
 
 <body>
+    <canvas id="mycanvas"></canvas>
+    <script type="text/javascript">
+        const canvas = document.getElementById('mycanvas');
 
-    <!-- Include local copy of Pixi.js -->
-    <script src="pixi.min.js"></script>
-
-    <!-- or link to Pixi.js on CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.2/pixi.min.js"></script>
-
-    <!-- the rest of our PIXI.js code -->
-    <script>
-        // 1. Create a Pixi renderer and define size and a background color
-        var renderer = PIXI.autoDetectRenderer(800, 600, {
-
-            // create transparent canvas
-            transparent: true,
-
-            // change background color to blue
-            backgroundColor: '0x86D0F2',
-            border: '1px solid red'
-
+        const app = new PIXI.Application({
+            view: canvas,
+            width: window.innerWidth,
+            height: window.innerHeight,
         });
 
-        // 2. Append canvas element to the body
-        document.body.appendChild(renderer.view);
+        const texture = PIXI.Texture.from('./img/bg.png');
+        const texture2 = PIXI.Texture.from('./img/sprite.png');
 
-        // 3. Create a container that will hold your scene
-        var stage = new PIXI.Container();
+        let sprite1, sprite2, sprite3;
 
-        var lines = [
-            [
-                [-8.154, 558.886],
-                [121.097, 294.348],
-                [133.744, 282.209],
-                [134.591, 281.512],
-                [166.995, 250.542], // duplicate 
-                [166.995, 250.542], // duplicate 
-                [167.029, 250.518],
-                [170.649, 248.128],
-                [172.666, 246.822],
-                [176.68, 244.274],
-                [176.68, 244.274],
-                [178.455, 243.17],
-                [292.488, -14.857]
-            ]
-        ]
+        const img = new PIXI.Sprite(texture);
+        img.x = app.renderer.width / 2;
+        img.y = app.renderer.height / 2;
+        img.anchor.x = 0.5;
+        img.anchor.y = 0.5;
+        app.stage.addChild(img);
 
-        lines.forEach((line) => {
-            console.log(line)
-            var graphics = new PIXI.Graphics();
-            graphics.lineStyle(4, 0xD5402B, 1);
-            graphics.position.x = renderer.width / 2;
-            graphics.position.y = renderer.height / 2;
-            // graphics.pivot.set(0, 0);
-            // graphics.rotation = 0.785398;
-            line.forEach((point, i) => {
-                if (i === 0) graphics.moveTo(point[0], point[1]);
-                else graphics.lineTo(point[0], point[1]);
-            })
-            graphics.endFill();
-            stage.addChild(graphics);
-        });
+        let container = new PIXI.Container();
+        app.stage.addChild(container);
 
+        // sprite1 = new PIXI.Sprite(texture2);
+        // sprite1.position.set(app.renderer.screen.width / 2, app.renderer.screen.height / 2);
+        // sprite1.anchor.set(0.5);
+        // container.addChild(sprite1);
 
-        // add stage to the canvas
-        render();
+        // sprite2 = new PIXI.Sprite(texture2);
+        // sprite2.x = 100;
+        // sprite2.y = 100;
+        // sprite2.tint = 0xff0000;
+        // container.addChild(sprite2);
 
-        function render() {
-            renderer.render(stage);
+        // sprite3 = new PIXI.Sprite(texture2);
+        // sprite3.position.set(200, 100);
+        // sprite3.anchor.set(0.5);
+        // sprite3.pivot.set(100, 100);
+        // container.addChild(sprite3);
+        
+        let sprites = [];
+
+        addSprites();
+
+        app.ticker.add(animate);
+
+        function addSprites() {
+            for (let i = 0; i < 100; i++) {
+
+                // set object into image
+                let sprite = new PIXI.Sprite(texture2);
+
+                // set position
+                sprite.x = Math.random() * app.renderer.screen.width;
+                sprite.y = Math.random() * app.renderer.screen.height;
+                sprite.anchor.set(0.5);
+
+                // change color
+                sprite.tint = Math.random() * 0xffffff;
+
+                // add sprite into container and array
+                container.addChild(sprite);
+                sprites.push(sprite);
+            }
         }
+
+        let delta = 0;
+
+        function animate() {
+            delta += 0.1;
+
+            // sprite1.alpha = Math.sin(delta);
+            // sprite1.blendMode = PIXI.BLEND_MODES.MULTIPLY;
+
+            // reaction with img by button
+            // sprite1.interactive = true;
+            // sprite1.buttonMode = true;
+
+            // sprite2.x = 100 + Math.sin(delta) * 10;
+
+            // sprite3.scale = new PIXI.Point(0.5, 0.5);
+            // sprite3.rotation += 0.1;
+
+            container.y = Math.sin(delta) * 10;
+
+            for (let i = 0; i < sprites.length; i++) {
+                sprites[i].rotation += 0.1;
+            }
+            // console.log(sprite1.y)
+        }
+
     </script>
 </body>
 

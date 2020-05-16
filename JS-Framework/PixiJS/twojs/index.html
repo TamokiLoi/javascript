@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="main"></div>
+    <script src="two.js"></script>
+    <script>
+        var el = document.getElementById("main"),
+            two = new Two({
+                fullscreen: true
+            });
+
+        two.appendTo(el);
+
+        var line = two.makeLine(10, 10, 110, 210);
+        line.linewidth = 10;
+        line.stroke = "rgba(255, 0, 0, 0.5)";
+
+        two.update();
+    </script>
+
+</body>
+
+</html>
