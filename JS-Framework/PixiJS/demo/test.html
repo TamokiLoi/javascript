@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.2/pixi.min.js"></script>
+</head>
+
+<body>
+    <canvas id="mycanvas"></canvas>
+    <!-- Include local copy of Pixi.js -->
+    <script src="pixi.min.js"></script>
+
+    <!-- the rest of our PIXI.js code -->
+    <script>
+        const canvas = document.getElementById('mycanvas');
+        PIXI.Graphics.prototype.drawDashLine = function (toX, toY, dash = 16, gap = 8) {
+            const lastPosition = this.currentPath.shape.points;
+            console.log(this.currentPath.shape)
+
+            const currentPosition = {
+                x: lastPosition[lastPosition.length - 2] || 0,
+                y: lastPosition[lastPosition.length - 1] || 0
+            };
+
+            const absValues = {
+                toX: Math.abs(toX),
+                toY: Math.abs(toY)
+            };
+
+            console.log(currentPosition)
+            console.log(absValues)
+
+            for (
+                ;
+                Math.abs(currentPosition.x) < absValues.toX ||
+                Math.abs(currentPosition.y) < absValues.toY;
+            ) {
+                currentPosition.x =
+                    Math.abs(currentPosition.x + dash) < absValues.toX
+                        ? currentPosition.x + dash
+                        : toX;
+                currentPosition.y =
+                    Math.abs(currentPosition.y + dash) < absValues.toY
+                        ? currentPosition.y + dash
+                        : toY;
+                console.log(currentPosition.x, currentPosition.y, 'lineTo')
+                this.lineTo(currentPosition.x, currentPosition.y);
+
+                currentPosition.x =
+                    Math.abs(currentPosition.x + gap) < absValues.toX
+                        ? currentPosition.x + gap
+                        : toX;
+                currentPosition.y =
+                    Math.abs(currentPosition.y + gap) < absValues.toY
+                        ? currentPosition.y + gap
+                        : toY;
+                console.log(currentPosition.x, currentPosition.y, 'moveTo')
+                this.moveTo(currentPosition.x, currentPosition.y);
+            }
+        };
+
+        const app = new PIXI.Application({
+            view: canvas,
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+        document.body.appendChild(app.view);
+
+        const line = new PIXI.Graphics();
+        line.lineStyle(1, 0xffffff);
+        line.moveTo(0, 0);
+        line.drawDashLine(50, 50, 10, 3);
+
+        // line.moveTo(150, 0);
+        // line.drawDashLine(150, 100, 20, 10);
+
+        // line.moveTo(300, 20);
+        // line.drawDashLine(600, 20, 1, 3);
+
+        app.stage.addChild(line);
+
+    </script>
+</body>
+
+</html>

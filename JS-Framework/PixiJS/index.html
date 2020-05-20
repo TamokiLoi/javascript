@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        var osaka = [34.6535, 135.4944];
+        var tokyo = [35.6696, 139.7639];
+        var arr = [];
+        var arrChild = [];
+        function random(min, max) {
+            return min + Math.random() * (max - min);
+        }
+        for (let i = 0; i < 50000; i++) {
+            arrChild.push([random(osaka[0], tokyo[0]), random(osaka[1], tokyo[1])])
+        }
+        arr.push(arrChild);
+        console.log(arr)
+    </script>
+</body>
+
+</html>
